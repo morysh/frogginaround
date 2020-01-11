@@ -1,49 +1,48 @@
 version: "3.3"
 
 services:
-    mariadb:
-        image: mariadb:10.4.7
-        container_name: mariadb-wordpress
-        ports:
-            - '3306:3306'
-        volumes:
-            - ./db-data:/var/lib/mysql
-        environment:
-            - MYSQL_ROOT_PASSWORD=rhzbiddb
-            - MYSQL_USER=wordpress
-            - MYSQL_PASSWORD=wordpressPassword
-            - MYSQL_DATABASE=wordpress
-        user: :6679
+  db:
+    image: mariadb:10.4.7
+    container_name: mariadb-wordpress
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./db-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=rhzbiddb
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=wordpressPassword
+      - MYSQL_DATABASE=wordpress
+    user: :6679
 
-    wordpress:
-        image: wordpress:5.3.0-php7.3-fpm-alpine
-        container_name: wordpress
-        depends_on:
-            - mariadb
-        ports:
-            - '9000:9000'
-        volumes:
-            - ./wordpress:/var/www/html
-        environment:
-            - WORDPRESS_DB_HOST=mariadb
-            - WORDPRESS_DB_NAME=wordpress
-            - WORDPRESS_DB_USER=wordpress
-            - WORDPRESS_DB_PASSWORD=wordpressPassword
-        links:
-            - mariadb
-        user: :6679
+  wordpress:
+    image: wordpress:5.3.2-php7.4-fpm-alpine
+    container_name: wordpress
+    depends_on:
+      - db
+    ports:
+      - '9000:9000'
+    volumes:
+      - ./wordpress:/var/www/html
+    environment:
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=wordpressPassword
+    links:
+      - db
 
-    nginx:
-        image: nginx:1.17.3-alpine
-        container_name: nginx-wordpress
-        depends_on:
-            - wordpress
-        ports:
-            - '8081:80'
-        volumes:
-            - ./nginx:/etc/nginx/conf.d
-            - ./logs/nginx:/var/log/nginx
-            - ./wordpress:/var/www/html
-        links:
-            - wordpress
-        user: :6679
+  nginx:
+    image: nginx:1.17.3-alpine
+    container_name: nginx-wordpress
+    depends_on:
+      - wordpress
+    ports:
+      - '8081:80'
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./logs/nginx:/var/log/nginx
+      - ./wordpress:/var/www/html
+    links:
+      - wordpress
+    user: :82
