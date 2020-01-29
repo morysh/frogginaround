@@ -4,6 +4,9 @@ function load_stylsheets() {
     wp_register_style('base', get_template_directory_uri() . '/style.css');
     wp_enqueue_style('base');
 
+    wp_register_style('layout', get_template_directory_uri() . '/assets/styles/layout.css');
+    wp_enqueue_style('layout');
+
     wp_register_style('big', get_template_directory_uri() . '/assets/styles/big.css');
     wp_enqueue_style('big');
 }

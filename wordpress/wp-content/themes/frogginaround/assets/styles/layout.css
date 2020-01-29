@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: relative;
+}
+
+header h1 {
+    text-align: center;
+    padding: .5rem 0;
+    font-size: 5rem;
+}
+
+main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+article {
+    font-size: 1.6rem;
+    max-width: 80rem;
+}
+
+#sidenav {
+    width: 30rem;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#sidenav-closer {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 4rem;
+    height: 4rem;
+}
+
+
+#sidenav-closer::after {
+    content: '';
+}
+
+.folded-left {
+    transform: translateX(-100%);
+    box-shadow: none !important;
+}

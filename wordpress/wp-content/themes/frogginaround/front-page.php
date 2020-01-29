@@ -1,27 +1,20 @@
 <?php get_header(); ?>
 
-<header>
-    <img id="banner" src="<?= get_template_directory_uri(); ?>/assets/images/mapemonde.jpg">
-        <button class="hamburger btn-reset">
-            <svg>
-                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/icons/hamburger.svg#hamburger"></use>
-            </svg>
-        </button>
-        <h1>Froggin' Around</h1>
-</header>
+    <section id="articles">
 
-<main>
-    <aside class="left"></aside>
-    <?php if (have_posts()): while (have_posts()):
-        the_post(); ?>
+        <?php if (have_posts()): while (have_posts()):
+            the_post(); ?>
 
-        <article>
-            <h1 class="post-title"><?php the_title(); ?></h1>
-            <?php the_content(); ?>
-        </article>
+            <article>
+                <h2 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+                <p class="post-date"><?php the_date() ?> à <?php the_time(); ?></p>
+                <div class="post-content">
+                    <?php the_excerpt(); ?>
+                </div>
+            </article>
 
-    <?php endwhile; endif; ?>
-    <aside class="right"></aside>
-</main>
+        <?php endwhile; endif; ?>
+
+    </section>
 
 <?php get_footer(); ?>
