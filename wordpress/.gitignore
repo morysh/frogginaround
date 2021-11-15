@@ -1,0 +1,27 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Wordpress files
+/data/*
+!/data/wp-content
+
+/data/wp-content/*
+!/data/wp-content/themes
+
+/data/wp-content/themes/*
+!/data/wp-content/themes/frogginaround
+
+
+# Mariadb data
+/db
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# System Files
+.DS_Store
+Thumbs.db
