@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WordpressService } from 'src/app/shared/services/wordpress.service';
 
 @Component({
-  selector: 'fa-articles-gallery',
+  selector: 'fa-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss'],
 })
