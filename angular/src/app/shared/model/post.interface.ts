@@ -1,7 +1,6 @@
-import { GenericPost } from './generic-post.interface';
+import { BasePost } from './base-post.interface';
 
-export interface Post extends GenericPost {
-  category: string;
-  author: string;
-  publishDate: string;
+export interface Post extends BasePost {
+  content: string;
+  featuredMediaTag: HTMLElement;
 }

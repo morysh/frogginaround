@@ -22,9 +22,6 @@ export class WordpressResolver implements Resolve<HttpErrorResponse | null> {
   ): HttpErrorResponse | null {
     this.http.get<UrlData>(environment.domain + state.url).subscribe(
       (urlData: UrlData): void => {
-        console.log(route);
-        console.log(state);
-
         switch (urlData.type) {
           case UrlType.POSTS:
             this.router.navigate(['/posts'], { skipLocationChange: true });

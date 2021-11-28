@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PostThumbnailComponent } from './post-thumbnail.component';
+import { PostThumbnailComponent } from './preview.component';
 
 describe('ArticleThumbnailComponent', () => {
   let component: PostThumbnailComponent;

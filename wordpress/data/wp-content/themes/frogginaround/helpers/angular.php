@@ -20,6 +20,7 @@ function WangularP($post_type) {
 ?>
       <article>
         <h2><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h2>
+        <?= get_the_post_thumbnail() ?>
         <p><a href="<?php echo get_category_link(get_the_category()[0]) ?>"><?php echo get_the_category()[0]->name ?></a></p>
       </article>
 <?php

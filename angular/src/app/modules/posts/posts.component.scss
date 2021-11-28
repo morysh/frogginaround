@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+}
+
+fa-preview {
+  flex-basis: 320px;
+  flex-grow: 1;
+  max-width: 480px;
+}
+
+fa-preview::before {
+  content: "";
+  display: block;
+  margin-top: 100%;
+}

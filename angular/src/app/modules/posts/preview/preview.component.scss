@@ -1,0 +1,63 @@
+:host {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+:host > * {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+a {
+  z-index: 100;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+:host:hover .text-wrapper {
+  transform: translateY(0);
+}
+
+.text-wrapper {
+  height: 100%;
+  background: var(--shade-color);
+  color: white;
+  transform: translateY(100%);
+  transition: transform 200ms ease;
+}
+
+h3 {
+  position: absolute;
+  text-align: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 0;
+  background: inherit;
+  transform: translateY(-100%);
+}
+
+h3::before {
+  content: "";
+  display: block;
+  background: linear-gradient(transparent, var(--shade-color));
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding-top: 80px;
+  transform: translateY(-100%);
+}
+
+p {
+  width: 100%;
+  height: 100%;
+  padding: 10%;
+}

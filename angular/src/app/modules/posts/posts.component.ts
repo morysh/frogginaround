@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Preview } from 'src/app/shared/model/preview.interface';
 import { WordpressService } from 'src/app/shared/services/wordpress.service';
 
 @Component({
@@ -7,7 +9,10 @@ import { WordpressService } from 'src/app/shared/services/wordpress.service';
   styleUrls: ['./posts.component.scss'],
 })
 export class PostsComponent implements OnInit {
+  public previews$?: Observable<Preview[]>;
   constructor(private wpService: WordpressService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.previews$ = this.wpService.getPreviews();
+  }
 }
