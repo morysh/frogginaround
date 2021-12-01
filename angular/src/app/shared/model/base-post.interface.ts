@@ -5,6 +5,6 @@ export interface BasePost {
   title: string;
   categories: Category[];
   tags: Tag[];
-  link: string;
+  link: URL;
   publishDate: Date;
 }

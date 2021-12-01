@@ -1,0 +1,30 @@
+@function bezier($p0, $p1, $p2, $p3, $t) {
+  $omt: 1 - $t;
+  @return $omt * $omt * $omt * $p0 + 3 * $omt * $omt * $t * $p1 + 3 * $omt * $t *
+    $t * $p2 + $t * $t * $t * $p3;
+}
+
+@function bg-fade($h, $s, $l, $a, $points) {
+  $step: 1 / $points;
+  $t: $step;
+  $xo: 0;
+  $xco: 0.25;
+  $xce: 0.5;
+  $xe: 1;
+  $yo: 0;
+  $yco: 0;
+  $yce: 1;
+  $ye: 1;
+  $gradient: "hsla(#{$h}, #{$s}%, #{$l}%, #{(1 - bezier($yo, $yco, $yce, $ye, 0)) * $a}) #{bezier($xo, $xco, $xce, $xe, 0) * 100}%,";
+
+  @while $t < 1 {
+    $gradient: $gradient +
+      "hsla(#{$h}, #{$s}%, #{$l}%, #{(1 - bezier($yo, $yco, $yce, $ye, $t)) * $a}) #{bezier($xo, $xco, $xce, $xe, $t) * 100}%,";
+    $t: $t + $step;
+  }
+
+  $gradient: $gradient +
+    "hsla(#{$h}, #{$s}%, #{$l}%, #{(1 - bezier($yo, $yco, $yce, $ye, 1)) * $a}) #{bezier($xo, $xco, $xce, $xe, 1) * 100}%";
+
+  @return unquote($gradient);
+}

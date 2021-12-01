@@ -1,11 +1,12 @@
+@import "../../../shared/scss/gradient.scss";
+@import "../../../shared/scss/constants.scss";
+
 :host {
-  display: block;
   position: relative;
   overflow: hidden;
 }
 
-:host > * {
-  display: block;
+.fill {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -13,51 +14,59 @@
   right: 0;
 }
 
-a {
-  z-index: 100;
+.post-link {
+  display: flex;
+  flex-flow: column nowrap;
 }
 
-img {
-  width: 100%;
-  height: 100%;
+.filler {
+  flex: 1 1 100%;
+  position: relative;
+
+  &::after {
+    content: "";
+    display: block;
+    padding-top: 20%;
+    background: linear-gradient(to top, bg-fade(0, 0, 0, $SHADE_ALPHA, 10));
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
 }
 
-:host:hover .text-wrapper {
-  transform: translateY(0);
-}
-
-.text-wrapper {
-  height: 100%;
-  background: var(--shade-color);
+.legend {
   color: white;
-  transform: translateY(100%);
-  transition: transform 200ms ease;
+  background: hsla(0, 0%, 0%, $SHADE_ALPHA);
+  padding: 10px;
 }
 
-h3 {
-  position: absolute;
+.title {
   text-align: center;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 10px 0;
-  background: inherit;
-  transform: translateY(-100%);
+  flex: 0 0 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  transition: flex-shrink $TRANSITION_TIME;
 }
 
-h3::before {
-  content: "";
-  display: block;
-  background: linear-gradient(transparent, var(--shade-color));
-  position: absolute;
-  top: 0;
-  width: 100%;
-  padding-top: 80px;
-  transform: translateY(-100%);
+:host:hover .title {
+  flex-shrink: 1;
 }
 
-p {
-  width: 100%;
-  height: 100%;
-  padding: 10%;
+.taxonomies {
+  display: flex;
+  justify-content: space-around;
+}
+
+.tag,
+.category {
+  border: 1px solid white;
+  border-radius: 6px;
+  padding: 3px;
+  transition: color $TRANSITION_TIME, background-color $TRANSITION_TIME;
+
+  &:hover {
+    color: hsl(0, 0%, 20%);
+    background: white;
+  }
 }

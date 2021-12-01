@@ -26,7 +26,7 @@ export class WordpressResolver implements Resolve<HttpErrorResponse | null> {
           case UrlType.POSTS:
             this.router.navigate(['/posts'], { skipLocationChange: true });
             return;
-          case UrlType.POST:
+          case UrlType.SINGLE:
             this.router.navigate(['/single', urlData.id], {
               skipLocationChange: false,
             });

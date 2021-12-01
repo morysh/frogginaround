@@ -1,6 +1,23 @@
-<a href="{{ preview.link }}"></a>
-<img src="{{ preview.thumbnail }}" alt="" />
-<div class="text-wrapper">
-  <h3>{{ preview.title }}</h3>
-  <p [innerHTML]="preview.excerpt"></p>
-</div>
+<img
+  src="{{ preview.thumbnail }}"
+  alt="Post thumbnail"
+  class="thumbnail fill"
+/>
+<a href="{{ preview.link }}" class="post-link fill">
+  <h2 class="title">
+    <div class="filler"></div>
+    <span class="legend">{{ preview.title }}</span>
+  </h2>
+  <p [innerHTML]="preview.excerpt" class="excerpt legend"></p>
+  <p class="legend taxonomies">
+    <a
+      class="category"
+      [href]="category.url"
+      *ngFor="let category of preview.categories"
+      >{{ category.name }}</a
+    >
+    <a class="tag" [href]="tag.url" *ngFor="let tag of preview.tags">{{
+      tag.name
+    }}</a>
+  </p>
+</a>
