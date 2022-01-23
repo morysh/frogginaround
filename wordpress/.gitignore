@@ -10,6 +10,8 @@
 /data/wp-content/themes/*
 !/data/wp-content/themes/frogginaround
 
+/data/wp-content/themes/frogginaround/angular
+
 
 # Mariadb data
 /db

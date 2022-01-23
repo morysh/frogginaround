@@ -1,5 +1,5 @@
 export enum UrlType {
   POSTS = 'POSTS',
-  SINGLE = 'SINGLE',
+  POST = 'POST',
   PAGE = 'PAGE',
 }

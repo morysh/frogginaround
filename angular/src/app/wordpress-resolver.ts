@@ -6,7 +6,6 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import { UrlData } from './shared/model/url-data.interface';
 import { UrlType } from './shared/model/url-type.enum';
 
@@ -20,15 +19,16 @@ export class WordpressResolver implements Resolve<HttpErrorResponse | null> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): HttpErrorResponse | null {
-    this.http.get<UrlData>(environment.domain + state.url).subscribe(
+    // routing parameter ignored but differentiates the request to avoid polluting the state history and messing with the navigation
+    this.http.get<UrlData>(state.url + '?routing=true').subscribe(
       (urlData: UrlData): void => {
         switch (urlData.type) {
           case UrlType.POSTS:
             this.router.navigate(['/posts'], { skipLocationChange: true });
             return;
-          case UrlType.SINGLE:
+          case UrlType.POST:
             this.router.navigate(['/single', urlData.id], {
-              skipLocationChange: false,
+              skipLocationChange: true,
             });
             return;
           case UrlType.PAGE:

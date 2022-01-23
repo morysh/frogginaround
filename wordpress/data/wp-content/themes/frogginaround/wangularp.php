@@ -23,6 +23,11 @@ class WangularpController extends \WP_REST_Controller {
             'callback'  => array( $this, 'previews' ),
 				]
     );
+    register_rest_route( $this->namespace, '/header', [
+						'methods'   => 'GET',
+						'callback'  => array( $this, 'custom_header' ),
+				]
+    );
     register_rest_route( $this->namespace, '/(?P<id>\d+)', [
 						'methods'   => 'GET',
 						'callback'  => array( $this, 'post' ),
@@ -50,6 +55,15 @@ class WangularpController extends \WP_REST_Controller {
 			return new WP_REST_Response('No post found for ID \''.$id.'\'', 404);
 		} else {
 			return new Model\Post($post, true); 
+		}
+	}
+
+	public function custom_header($data) {
+		if(empty(get_custom_header()->url)) {
+			return new WP_REST_Response('No custom header defined', 404);
+		} else {
+			wp_redirect(get_custom_header()->url);
+			exit();
 		}
 	}
 

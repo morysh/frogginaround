@@ -7,11 +7,12 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageComponent } from './modules/page/page.component';
 import { HttpClientModule } from '@angular/common/http';
+import { APP_BASE_HREF } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, PageComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
-  providers: [],
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
