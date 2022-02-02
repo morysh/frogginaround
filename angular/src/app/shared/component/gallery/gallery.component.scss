@@ -1,0 +1,73 @@
+@use "sass:math";
+@use "../../../shared/scss/gradient";
+@use "../../../shared/scss/constants";
+
+:host {
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100vh;
+  margin: auto;
+  display: none;
+  user-select: none;
+
+  &.focus {
+    display: block;
+  }
+}
+
+.prev,
+.next {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  display: flex;
+  box-shadow: 0 0 15px 20px transparent;
+  cursor: pointer;
+  transition: all ease constants.$TRANSITION_TIME;
+
+  &::before {
+    $size: 64px;
+    $borderSize: 10px;
+    $border: $borderSize solid constants.$PRIMARY_COLOR;
+
+    content: "";
+    width: $size;
+    height: $size;
+    border-left: $border;
+    border-bottom: $border;
+    border-top-left-radius: $borderSize;
+    border-bottom-right-radius: $borderSize;
+    border-bottom-left-radius: math.div($borderSize, 2);
+    margin: auto;
+    transform: translateX(30px) rotate(45deg);
+    filter: drop-shadow(0 0 8px black);
+    transition: all ease constants.$TRANSITION_TIME;
+  }
+
+  &:hover {
+    background: constants.$SHADE;
+    box-shadow: 0 0 15px 20px constants.$SHADE;
+
+    &::before {
+      transform: translateX(30px) rotate(45deg) scale(1.1);
+      filter: drop-shadow(0 0 8px white);
+    }
+
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+// trick to share the style with .prev
+.next {
+  transform: rotate(180deg);
+  transform-origin: 50vw;
+}

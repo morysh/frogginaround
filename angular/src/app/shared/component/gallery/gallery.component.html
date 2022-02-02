@@ -1,0 +1,7 @@
+<img
+  *ngFor="let img of images; let i = index"
+  [ngClass]="{ focus: i == index }"
+  [src]="img"
+/>
+<div class="prev" (click)="previous()"></div>
+<div class="next" (click)="next()"></div>

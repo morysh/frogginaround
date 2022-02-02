@@ -11,7 +11,5 @@ export class PreviewComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.preview);
-  }
+  ngOnInit(): void {}
 }

@@ -8,11 +8,11 @@ require_once __DIR__.'/tag.class.php';
 
 class Post extends Base_Post {
   public string $content;
-  public string $featuredMediaTag;
+  public string $featuredMediaUrl;
 
   public function __construct(\WP_Post $post) {
     parent::__construct($post);
     $this->content = apply_filters('the_content', $post->post_content);
-    $this->featuredMediaTag = get_the_post_thumbnail($post);
+    $this->featuredMediaUrl = get_the_post_thumbnail_url($post, 'large');
   }
 }

@@ -1,0 +1,15 @@
+article {
+  min-width: 320px;
+  max-width: 800px;
+  margin: auto;
+  text-align: justify;
+
+  p {
+    margin: 24px 0;
+  }
+
+  img {
+    height: auto;
+    cursor: pointer;
+  }
+}

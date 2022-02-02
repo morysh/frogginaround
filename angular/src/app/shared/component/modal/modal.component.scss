@@ -1,0 +1,53 @@
+@use "sass:math";
+@use "../../../shared/scss/constants";
+
+:host {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: constants.$SHADE;
+  cursor: pointer;
+  display: flex;
+}
+
+.close {
+  $L: 64px;
+  $l: 8px;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: $L + 4 * $l;
+  height: $L + 4 * $l;
+  padding: 2 * $l;
+  cursor: pointer;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  filter: drop-shadow(0 0 8px black);
+  transition: transform ease constants.$TRANSITION_TIME;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    width: $L;
+    height: $l;
+    background: constants.$PRIMARY_COLOR;
+    border-radius: math.div($l, 2);
+  }
+
+  &::before {
+    transform: translateY(math.div($l, 2)) rotate(45deg);
+  }
+
+  &::after {
+    transform: translateY(0 - math.div($l, 2)) rotate(-45deg);
+  }
+}

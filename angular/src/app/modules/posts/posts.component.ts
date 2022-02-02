@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Preview } from 'src/app/shared/model/preview.interface';
+import { HeaderService } from 'src/app/shared/services/header.service';
 import { WordpressService } from 'src/app/shared/services/wordpress.service';
 
 @Component({
@@ -10,9 +11,14 @@ import { WordpressService } from 'src/app/shared/services/wordpress.service';
 })
 export class PostsComponent implements OnInit {
   public previews$?: Observable<Preview[]>;
-  constructor(private wpService: WordpressService) {}
+  constructor(
+    private wpService: WordpressService,
+    private headerService: HeaderService
+  ) {
+    this.headerService.setDefaultPath();
+  }
 
   ngOnInit(): void {
-    this.previews$ = this.wpService.getPreviews();
+    this.previews$ = this.wpService.getPreviews$();
   }
 }

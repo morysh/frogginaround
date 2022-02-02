@@ -1,0 +1,4 @@
+<article [innerHTML]="content" (click)="openModal($event)"></article>
+<fa-modal (closed)="modalClosed()" *ngIf="modal">
+  <fa-gallery [images]="images" [index]="galleryIndex"></fa-gallery>
+</fa-modal>

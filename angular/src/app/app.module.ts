@@ -8,6 +8,8 @@ import { FooterComponent } from './footer/footer.component';
 import { PageComponent } from './modules/page/page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
+import { GalleryComponent } from './shared/component/gallery/gallery.component';
+import { ModalComponent } from './shared/component/modal/modal.component';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, PageComponent],

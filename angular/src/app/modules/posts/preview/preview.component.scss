@@ -1,5 +1,5 @@
-@import "../../../shared/scss/gradient.scss";
-@import "../../../shared/scss/constants.scss";
+@use "../../../shared/scss/gradient";
+@use "../../../shared/scss/constants";
 
 :host {
   position: relative;
@@ -28,7 +28,10 @@
     content: "";
     display: block;
     padding-top: 20%;
-    background: linear-gradient(to top, bg-fade(0, 0, 0, $SHADE_ALPHA, 10));
+    background: linear-gradient(
+      to top,
+      gradient.bg-fade(0, 0, 0, constants.$SHADE_ALPHA, 10)
+    );
     position: absolute;
     bottom: 0;
     left: 0;
@@ -38,7 +41,7 @@
 
 .legend {
   color: white;
-  background: hsla(0, 0%, 0%, $SHADE_ALPHA);
+  background: hsla(0, 0%, 0%, constants.$SHADE_ALPHA);
   padding: 10px;
 }
 
@@ -47,7 +50,7 @@
   flex: 0 0 100%;
   display: flex;
   flex-flow: column nowrap;
-  transition: flex-shrink $TRANSITION_TIME;
+  transition: flex-shrink constants.$TRANSITION_TIME;
 }
 
 :host:hover .title {
@@ -64,7 +67,8 @@
   border: 1px solid white;
   border-radius: 6px;
   padding: 3px;
-  transition: color $TRANSITION_TIME, background-color $TRANSITION_TIME;
+  transition: color constants.$TRANSITION_TIME,
+    background-color constants.$TRANSITION_TIME;
 
   &:hover {
     color: hsl(0, 0%, 20%);

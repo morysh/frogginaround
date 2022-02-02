@@ -3,7 +3,11 @@
   alt="Post thumbnail"
   class="thumbnail fill"
 />
-<a href="{{ preview.link }}/" class="post-link fill">
+<a
+  href="{{ preview.link.pathname }}"
+  [routerLink]="preview.link.pathname"
+  class="post-link fill"
+>
   <h2 class="title">
     <div class="filler"></div>
     <span class="legend">{{ preview.title }}</span>
