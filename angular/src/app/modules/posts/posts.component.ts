@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { Preview } from 'src/app/shared/model/preview.interface';
 import { HeaderService } from 'src/app/shared/services/header.service';
-import { WordpressService } from 'src/app/shared/services/wordpress.service';
 
 @Component({
   selector: 'fa-posts',
@@ -10,15 +9,17 @@ import { WordpressService } from 'src/app/shared/services/wordpress.service';
   styleUrls: ['./posts.component.scss'],
 })
 export class PostsComponent implements OnInit {
-  public previews$?: Observable<Preview[]>;
+  public previews!: Preview[];
   constructor(
-    private wpService: WordpressService,
-    private headerService: HeaderService
-  ) {
-    this.headerService.setDefaultPath();
-  }
+    private headerService: HeaderService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.previews$ = this.wpService.getPreviews$();
+    this.route.data.subscribe((data) => {
+      this.previews = data.previews;
+    });
+    this.headerService.setDefaultPath();
+    this.headerService.setBlogTitle();
   }
 }

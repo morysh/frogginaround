@@ -13,15 +13,4 @@
     <span class="legend">{{ preview.title }}</span>
   </h2>
   <p [innerHTML]="preview.excerpt" class="excerpt legend"></p>
-  <p class="legend taxonomies">
-    <a
-      class="category"
-      [href]="category.url"
-      *ngFor="let category of preview.categories"
-      >{{ category.name }}</a
-    >
-    <a class="tag" [href]="tag.url" *ngFor="let tag of preview.tags">{{
-      tag.name
-    }}</a>
-  </p>
 </a>

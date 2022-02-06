@@ -1,4 +1,17 @@
-<article [innerHTML]="content" (click)="openModal($event)"></article>
+<article (click)="openModal($event)">
+  <section class="metadatas">
+    <span class="categories">
+      <ng-container *ngFor="let cat of categories; let last = last">
+        <a [href]="cat.link" [title]="cat.name">{{ cat.name }}</a>
+        <span *ngIf="!last" class="separator">-</span>
+      </ng-container>
+    </span>
+    <time [attr.datetime]="publishDate.toISOString()" class="publish-date">
+      {{ publishDate | date: "longDate" }}
+    </time>
+  </section>
+  <div class="content" [innerHTML]="content"></div>
+</article>
 <fa-modal (closed)="modalClosed()" *ngIf="modal">
   <fa-gallery [images]="images" [index]="galleryIndex"></fa-gallery>
 </fa-modal>

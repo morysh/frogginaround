@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { GalleryComponent } from './shared/component/gallery/gallery.component';
 import { ModalComponent } from './shared/component/modal/modal.component';
+import { LoadingComponent } from './modules/loading/loading.component';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, PageComponent],

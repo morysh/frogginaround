@@ -9,9 +9,11 @@ import { HeaderService } from '../shared/services/header.service';
 })
 export class HeaderComponent implements OnInit {
   public imagePath: BehaviorSubject<string>;
+  public title: BehaviorSubject<string>;
 
   constructor(private headerService: HeaderService) {
     this.imagePath = headerService.getImagePath$();
+    this.title = headerService.getTitle$();
   }
 
   ngOnInit(): void {}

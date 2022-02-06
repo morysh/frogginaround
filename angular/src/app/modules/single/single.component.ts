@@ -1,8 +1,8 @@
 import { AfterViewChecked, Component, ElementRef, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { Category } from 'src/app/shared/model/category.interface';
 import { HeaderService } from 'src/app/shared/services/header.service';
-import { WordpressService } from 'src/app/shared/services/wordpress.service';
 import { Post } from '../../shared/model/post.interface';
 
 @Component({
@@ -11,15 +11,19 @@ import { Post } from '../../shared/model/post.interface';
   styleUrls: ['./single.component.scss'],
 })
 export class SingleComponent implements OnInit, AfterViewChecked {
-  get content() {
-    if (this.post) {
-      return this.sanitizer.bypassSecurityTrustHtml(this.post.content);
-    } else {
-      return '';
-    }
+  get content(): any {
+    return this.sanitizer.bypassSecurityTrustHtml(this.post.content);
   }
 
-  private post?: Post;
+  get publishDate(): Date {
+    return this.post.publishDate;
+  }
+
+  get categories(): Category[] {
+    return this.post.categories;
+  }
+
+  private post!: Post;
   private contentAttr?: string;
 
   modal: boolean = false;
@@ -29,18 +33,23 @@ export class SingleComponent implements OnInit, AfterViewChecked {
   constructor(
     private route: ActivatedRoute,
     private headerService: HeaderService,
-    private wpService: WordpressService,
     private ref: ElementRef,
     private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
-    this.wpService
-      .getPost$(this.route.snapshot.paramMap.get('id')!)
-      .subscribe((post) => {
-        this.post = post;
-        this.headerService.setImagePath(post.featuredMediaUrl.href);
-      });
+    this.route.data.subscribe((data) => {
+      this.post = data.post;
+
+      if (this.post.featuredMediaUrl.href) {
+        this.headerService.setImagePath(this.post.featuredMediaUrl.href);
+      } else {
+        this.headerService.setDefaultPath();
+      }
+      if (this.post.title) {
+        this.headerService.setTitle(this.post.title);
+      }
+    });
 
     this.contentAttr =
       '_ngcontent' +
@@ -52,7 +61,7 @@ export class SingleComponent implements OnInit, AfterViewChecked {
   ngAfterViewChecked(): void {
     (
       this.ref.nativeElement.querySelectorAll(
-        'article *'
+        '.content *'
       ) as NodeListOf<HTMLElement>
     ).forEach((e) => {
       e.setAttribute(this.contentAttr!, '');

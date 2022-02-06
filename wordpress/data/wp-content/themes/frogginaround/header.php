@@ -18,6 +18,11 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<base href="/wp-content/themes/frogginaround/angular/"/>
+	<script>
+		const GLOBALS = {
+			title: '<?= get_bloginfo('name') ?>'
+		}
+	</script>
 	<?php wp_head(); ?>
 </head>
 

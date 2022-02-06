@@ -29,6 +29,14 @@ export class WordpressService {
     return this.http.get<Post>(`/api/wangularp/v1/${id}`).pipe(
       tap((post: Post) => {
         this.transformBasePost(post);
+        post.categories.forEach((category: Category) => {
+          category.link = new URL(category.link);
+          category.link.host = window.location.host;
+        });
+        post.tags.forEach((tag: Tag) => {
+          tag.link = new URL(tag.link);
+          tag.link.host = window.location.host;
+        });
         post.featuredMediaUrl = new URL(post.featuredMediaUrl);
       })
     );
@@ -38,13 +46,5 @@ export class WordpressService {
     post.link = new URL(post.link);
     post.link.host = window.location.host;
     post.publishDate = new Date(post.publishDate);
-    post.categories.forEach((category: Category) => {
-      category.url = new URL(category.url);
-      category.url.host = window.location.host;
-    });
-    post.tags.forEach((tag: Tag) => {
-      tag.url = new URL(tag.url);
-      tag.url.host = window.location.host;
-    });
   }
 }

@@ -1,9 +1,39 @@
+@use "../shared/scss/gradient";
+@use "../shared/scss/constants";
+
 :host {
   display: flex;
+  position: relative;
 }
 
-#banner {
+.banner {
   width: 100%;
   max-height: 50vh;
   object-fit: cover;
+}
+
+h1 {
+  display: flex;
+  flex-flow: column;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  color: white;
+
+  &::before {
+    content: "";
+    display: block;
+    background: linear-gradient(
+      to top,
+      gradient.bg-fade(0, 0, 0, constants.$SHADE_ALPHA, 10)
+    );
+    height: 32px;
+  }
+
+  .title {
+    padding: 10px;
+    background: constants.$SHADE;
+  }
 }

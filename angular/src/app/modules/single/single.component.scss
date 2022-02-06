@@ -1,15 +1,66 @@
 article {
+  padding: 0 5px;
   min-width: 320px;
   max-width: 800px;
   margin: auto;
   text-align: justify;
+  line-height: 150%;
 
   p {
     margin: 24px 0;
+  }
+
+  figure {
+    text-align: center;
   }
 
   img {
     height: auto;
     cursor: pointer;
   }
+}
+
+.metadatas {
+  margin-top: 16px;
+  font-size: 75%;
+  color: #666;
+  font-style: italic;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.categories {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+
+  a {
+    text-decoration: underline;
+    text-align: center;
+
+    // Trick to avoid the content moving when setting the font-weight to bold
+    &::before {
+      content: attr(title);
+      display: block;
+      font-weight: bold;
+      height: 0;
+      visibility: hidden;
+    }
+
+    &:hover {
+      font-weight: bold;
+    }
+  }
+
+  .separator {
+    margin: 0 8px;
+  }
+}
+
+.publish-date {
+  margin-left: 16px;
+  white-space: nowrap;
 }

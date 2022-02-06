@@ -6,11 +6,13 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { UrlData } from './shared/model/url-data.interface';
-import { UrlType } from './shared/model/url-type.enum';
+import { UrlData } from '../shared/model/url-data.interface';
+import { UrlType } from '../shared/model/url-type.enum';
 
 @Injectable({ providedIn: 'root' })
-export class WordpressResolver implements Resolve<HttpErrorResponse | null> {
+export class WordpressRoutingResolver
+  implements Resolve<HttpErrorResponse | null>
+{
   constructor(private http: HttpClient, private router: Router) {}
 
   private error: HttpErrorResponse | null = null;
@@ -24,7 +26,7 @@ export class WordpressResolver implements Resolve<HttpErrorResponse | null> {
       (urlData: UrlData): void => {
         switch (urlData.type) {
           case UrlType.POSTS:
-            this.router.navigate(['/posts'], { skipLocationChange: true });
+            this.router.navigate(['/previews'], { skipLocationChange: true });
             return;
           case UrlType.POST:
             this.router.navigate(['/single', urlData.id], {
