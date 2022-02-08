@@ -23,6 +23,11 @@ class WangularpController extends \WP_REST_Controller {
             'callback'  => array( $this, 'previews' ),
 				]
     );
+    register_rest_route( $this->namespace, '/previews/category/(?P<category>\d+)', [
+            'methods'   => 'GET',
+            'callback'  => array( $this, 'previews_by_category' ),
+				]
+    );
     register_rest_route( $this->namespace, '/header', [
 						'methods'   => 'GET',
 						'callback'  => array( $this, 'custom_header' ),
@@ -35,20 +40,34 @@ class WangularpController extends \WP_REST_Controller {
     );
 	}
 
-	public function previews($request){
+	public function previews_by_category($request) {
+		$cat = $request['category'];
+
+		$posts =  $this->get_previews($request, $cat);
+		return array(
+			'previews' => $posts,
+			'category' => get_category($cat)->name
+		);
+	}
+
+	public function previews($request) {
+		return $this->get_previews($request, NULL);
+	}
+
+	public function get_previews($request, $cat) {
 		$page = $request->get_query_params()['page'];
 
 		$args = [
 			'post_per_page' => self::PAGE_SIZE,
+			'cat' => $cat,	
 			'page' => empty($page) ? $page : 1,
 		];
 
 		return $this->get_data($args, fn($post) => new Model\Preview($post));
-		// return $this->get_posts($args);
 	}
 
-	public function post($data) {
-		$id = $data['id'];
+	public function post($request) {
+		$id = $request['id'];
 		$post = get_post($id);
 
 		if(empty($post)) {
@@ -58,7 +77,7 @@ class WangularpController extends \WP_REST_Controller {
 		}
 	}
 
-	public function custom_header($data) {
+	public function custom_header($request) {
 		if(empty(get_custom_header()->url)) {
 			return new WP_REST_Response('No custom header defined', 404);
 		} else {

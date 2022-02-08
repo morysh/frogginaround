@@ -1,3 +1,3 @@
 <?php
 require_once('helpers/angular.php');
-WangularP('SINGLE');
+WangularP('PAGE', get_the_ID());

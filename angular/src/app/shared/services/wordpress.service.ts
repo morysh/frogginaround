@@ -8,6 +8,7 @@ import { Category } from '../model/category.interface';
 import { Tag } from '../model/tag.interface';
 import { Post } from '../model/post.interface';
 import { BasePost } from '../model/base-post.interface';
+import { CategoryResponse } from '../model/category-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,18 @@ export class WordpressService {
         });
       })
     );
+  }
+
+  public getCategoryPreviews$(category: number): Observable<CategoryResponse> {
+    return this.http
+      .get<CategoryResponse>(`/api/wangularp/v1/previews/category/${category}`)
+      .pipe(
+        tap((response: CategoryResponse) => {
+          response.previews.forEach((preview: Preview) => {
+            this.transformBasePost(preview);
+          });
+        })
+      );
   }
 
   public getPost$(id: string): Observable<Post> {
@@ -44,7 +57,6 @@ export class WordpressService {
 
   private transformBasePost(post: BasePost): void {
     post.link = new URL(post.link);
-    post.link.host = window.location.host;
     post.publishDate = new Date(post.publishDate);
   }
 }

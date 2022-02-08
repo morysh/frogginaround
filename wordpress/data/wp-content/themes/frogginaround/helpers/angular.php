@@ -1,14 +1,10 @@
 <?php
 
-function wangularp($post_type) {
+function wangularp($post_type, $id) {
   if (strstr($_SERVER['HTTP_ACCEPT'], 'json')) {
-    if ( have_posts() ) {
-      echo json_encode(array(
-          'id' => get_the_ID(),
-          'type' => $post_type), JSON_FORCE_OBJECT);
-    } else {
-      echo '{}';
-    }
+    echo json_encode(array(
+        'id' => $id,
+        'type' => $post_type), JSON_FORCE_OBJECT);
   } else {
     get_header();
       

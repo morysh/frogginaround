@@ -6,8 +6,8 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { UrlData } from '../shared/model/url-data.interface';
-import { UrlType } from '../shared/model/url-type.enum';
+import { UrlData } from './shared/model/url-data.interface';
+import { UrlType } from './shared/model/url-type.enum';
 
 @Injectable({ providedIn: 'root' })
 export class WordpressRoutingResolver
@@ -25,6 +25,11 @@ export class WordpressRoutingResolver
     this.http.get<UrlData>(state.url + '?routing=true').subscribe(
       (urlData: UrlData): void => {
         switch (urlData.type) {
+          case UrlType.CATEGORY:
+            this.router.navigate(['/previews', 'category', urlData.id], {
+              skipLocationChange: true,
+            });
+            return;
           case UrlType.POSTS:
             this.router.navigate(['/previews'], { skipLocationChange: true });
             return;

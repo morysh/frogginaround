@@ -5,17 +5,17 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Preview } from '../shared/model/preview.interface';
-import { WordpressService } from '../shared/services/wordpress.service';
+import { Post } from '../../shared/model/post.interface';
+import { WordpressService } from '../../shared/services/wordpress.service';
 
 @Injectable({ providedIn: 'root' })
-export class WordpressPreviewsResolver implements Resolve<Preview[]> {
+export class WordpressPostResolver implements Resolve<Post> {
   constructor(private wpService: WordpressService) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<Preview[]> {
-    return this.wpService.getPreviews$();
+  ): Observable<Post> {
+    return this.wpService.getPost$(route.paramMap.get('id')!);
   }
 }

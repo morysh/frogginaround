@@ -1,10 +1,6 @@
-<img
-  src="{{ preview.thumbnail }}"
-  alt="Post thumbnail"
-  class="thumbnail fill"
-/>
+<img [src]="preview.thumbnail" alt="Post thumbnail" class="thumbnail fill" />
 <a
-  href="{{ preview.link.pathname }}"
+  [href]="preview.link.pathname"
   [routerLink]="preview.link.pathname"
   class="post-link fill"
 >
