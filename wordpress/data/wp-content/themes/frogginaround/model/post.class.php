@@ -17,9 +17,11 @@ class Post extends Base_Post {
   public function __construct(\WP_Post $post) {
     parent::__construct($post);
     $this->content = apply_filters('the_content', $post->post_content);
+    $this->categories = [];
     foreach(get_the_category($post) as $category) {
       $this->categories[] = new Category($category);
     }
+    $this->tags = [];
     foreach(get_the_tags($post) as $tag) {
       $this->tags[] = new Tag($tag);
     }

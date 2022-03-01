@@ -30,18 +30,18 @@ export class WordpressRoutingResolver
               skipLocationChange: true,
             });
             return;
-          case UrlType.POSTS:
-            this.router.navigate(['/previews'], { skipLocationChange: true });
+          case UrlType.PAGE:
+            this.router.navigate(['/page', urlData.id], {
+              skipLocationChange: true,
+            });
             return;
           case UrlType.POST:
             this.router.navigate(['/single', urlData.id], {
               skipLocationChange: true,
             });
             return;
-          case UrlType.PAGE:
-            this.router.navigate(['/page', urlData.id], {
-              skipLocationChange: true,
-            });
+          case UrlType.POSTS:
+            this.router.navigate(['/previews'], { skipLocationChange: true });
             return;
           default:
             return;

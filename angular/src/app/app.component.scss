@@ -2,3 +2,9 @@
   display: flex;
   flex-flow: column nowrap;
 }
+
+fa-navbar {
+  z-index: 10;
+  position: sticky;
+  top: 0;
+}

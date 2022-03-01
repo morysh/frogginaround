@@ -1,0 +1,20 @@
+@use "../../shared/scss/constants.scss";
+
+:host {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  justify-items: center;
+}
+
+img {
+  width: 100%;
+  max-width: 480px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform ease constants.$TRANSITION_TIME;
+
+  &:hover {
+    z-index: 20;
+    transform: scale(1.1);
+  }
+}

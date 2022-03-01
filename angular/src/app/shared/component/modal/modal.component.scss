@@ -10,6 +10,7 @@
   background: constants.$SHADE;
   cursor: pointer;
   display: flex;
+  z-index: 1000;
 }
 
 .close {

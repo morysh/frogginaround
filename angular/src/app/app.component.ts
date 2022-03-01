@@ -3,6 +3,8 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 registerLocaleData(localeFr);
 
+declare const GLOBALS: any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,4 +13,5 @@ registerLocaleData(localeFr);
 })
 export class AppComponent {
   title = 'frogginaround';
+  public readonly menu = GLOBALS.menus.navigation;
 }

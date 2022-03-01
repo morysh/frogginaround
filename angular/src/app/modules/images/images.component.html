@@ -1,0 +1,9 @@
+<img
+  *ngFor="let image of images; let index = index"
+  [src]="image.thumbnail"
+  [alt]="image.title"
+  (click)="openModal(index)"
+/>
+<fa-modal (closed)="modalClosed()" *ngIf="modal">
+  <fa-gallery [images]="fullImages" [index]="galleryIndex"></fa-gallery>
+</fa-modal>

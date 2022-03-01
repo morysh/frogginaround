@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { Preview } from '../model/preview.interface';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Category } from '../model/category.interface';
 import { Tag } from '../model/tag.interface';
 import { Post } from '../model/post.interface';
 import { BasePost } from '../model/base-post.interface';
 import { CategoryResponse } from '../model/category-response.interface';
+import { Image } from '../model/image.interface';
+import { SearchResponse } from '../model/search-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +39,18 @@ export class WordpressService {
       );
   }
 
+  public getSearchPreviews$(query: string): Observable<SearchResponse> {
+    return this.http
+      .get<SearchResponse>(`/api/wangularp/v1/search?q=${query || ''}`)
+      .pipe(
+        tap((response: SearchResponse) => {
+          response.previews.forEach((preview: Preview) => {
+            this.transformBasePost(preview);
+          });
+        })
+      );
+  }
+
   public getPost$(id: string): Observable<Post> {
     return this.http.get<Post>(`/api/wangularp/v1/${id}`).pipe(
       tap((post: Post) => {
@@ -50,13 +63,26 @@ export class WordpressService {
           tag.link = new URL(tag.link);
           tag.link.host = window.location.host;
         });
-        post.featuredMediaUrl = new URL(post.featuredMediaUrl);
+        post.featuredMediaUrl &&= new URL(post.featuredMediaUrl);
       })
     );
   }
 
+  public getImages$(): Observable<Image[]> {
+    return this.http
+      .get<Image[]>('/api/wangularp/v1/images') //
+      .pipe(
+        tap((response: Image[]) => {
+          response.forEach((image: Image) => {
+            image.thumbnail &&= new URL(image.thumbnail);
+            image.full &&= new URL(image.full);
+          });
+        })
+      );
+  }
+
   private transformBasePost(post: BasePost): void {
-    post.link = new URL(post.link);
-    post.publishDate = new Date(post.publishDate);
+    post.link &&= new URL(post.link);
+    post.publishDate &&= new Date(post.publishDate);
   }
 }

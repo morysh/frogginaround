@@ -19,7 +19,12 @@ const routes: Routes = [
   {
     path: 'page',
     loadChildren: () =>
-      import('./modules/page/page.module').then((m) => m.PageModule),
+      import('./modules/single/single.module').then((m) => m.SingleModule),
+  },
+  {
+    path: 'images',
+    loadChildren: () =>
+      import('./modules/images/images.module').then((m) => m.ImagesModule),
   },
   {
     path: 'not-found',

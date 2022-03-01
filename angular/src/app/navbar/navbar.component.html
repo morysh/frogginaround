@@ -1,0 +1,32 @@
+<a href="/" routerLink="/" class="home"></a>
+
+<form class="search" (submit)="search($event, query.value)">
+  <input type="text" name="query" placeholder="recherche" #query />
+  <button type="submit" class="submit"></button>
+</form>
+
+<button
+  type="button"
+  class="hamburger"
+  (click)="toggleNav($event)"
+  [ngClass]="{ open: nav }"
+>
+  <span></span>
+</button>
+
+<nav [ngClass]="{ open: nav }">
+  <ng-container *ngFor="let item of items; let index = index">
+    <a
+      *ngIf="isInternal(item)"
+      [href]="item.link.pathname"
+      [routerLink]="item.link.pathname"
+      class="link"
+      #link
+    >
+      {{ item.title }}
+    </a>
+    <a *ngIf="!isInternal(item)" [href]="item.link" class="link" #link>
+      {{ item.title }}
+    </a>
+  </ng-container>
+</nav>

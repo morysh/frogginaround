@@ -1,1 +1,2 @@
 <fa-preview *ngFor="let preview of previews" [preview]="preview"></fa-preview>
+<p *ngIf="previews.length === 0" class="no-result">Aucun résultat</p>

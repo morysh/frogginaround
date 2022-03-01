@@ -17,12 +17,15 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
-      if (data.previews instanceof Array) {
+      if (data.previews) {
         this.previews = data.previews;
         this.headerService.setBlogTitle();
-      } else {
-        this.previews = data.previews.previews;
-        this.headerService.setTitle('Category: ' + data.previews.category);
+      } else if (data.category) {
+        this.previews = data.category.previews;
+        this.headerService.setTitle('Category: ' + data.category.category);
+      } else if (data.search) {
+        this.previews = data.search.previews;
+        this.headerService.setTitle('Recherche: ' + data.search.query);
       }
     });
     this.headerService.setDefaultPath();

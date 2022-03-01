@@ -7,7 +7,7 @@ function wangularp($post_type, $id) {
         'type' => $post_type), JSON_FORCE_OBJECT);
   } else {
     get_header();
-      
+
     echo '<app-root></app-root>';
   
     get_footer();

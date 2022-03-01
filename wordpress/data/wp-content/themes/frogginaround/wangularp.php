@@ -2,8 +2,10 @@
 
 namespace Wangularp;
 
-require_once  __DIR__.'/model/post.class.php';
-require_once  __DIR__.'/model/preview.class.php';
+require_once __DIR__.'/model/image.class.php';
+require_once __DIR__.'/model/post.class.php';
+require_once __DIR__.'/model/preview.class.php';
+require_once __DIR__.'/helpers/angular-helper.php';
 
 use Closure;
 use Wangularp\Model;
@@ -14,28 +16,43 @@ class WangularpController extends \WP_REST_Controller {
 	const PAGE_SIZE = 12;
 
 	public function __construct() {
-		$this->namespace     = '/wangularp/v1';
+		$this->namespace = '/wangularp/v1';
 	}
 
   public function register_routes() {
     register_rest_route( $this->namespace, '/previews', [
             'methods'   => 'GET',
-            'callback'  => array( $this, 'previews' ),
+            'callback'  => array( $this, 'previews'),
 				]
     );
     register_rest_route( $this->namespace, '/previews/category/(?P<category>\d+)', [
             'methods'   => 'GET',
-            'callback'  => array( $this, 'previews_by_category' ),
+            'callback'  => array( $this, 'previews_by_category'),
 				]
     );
     register_rest_route( $this->namespace, '/header', [
 						'methods'   => 'GET',
-						'callback'  => array( $this, 'custom_header' ),
+						'callback'  => array( $this, 'custom_header'),
 				]
     );
     register_rest_route( $this->namespace, '/(?P<id>\d+)', [
 						'methods'   => 'GET',
-						'callback'  => array( $this, 'post' ),
+						'callback'  => array( $this, 'post'),
+				]
+    );
+    register_rest_route( $this->namespace, '/menu', [
+						'methods'   => 'GET',
+						'callback'  => array( $this, 'menu'),
+				]
+    );
+    register_rest_route( $this->namespace, '/images', [
+						'methods'   => 'GET',
+						'callback'  => array( $this, 'images'),
+				]
+    );
+    register_rest_route( $this->namespace, '/search', [
+						'methods'   => 'GET',
+						'callback'  => array( $this, 'search'),
 				]
     );
 	}
@@ -86,9 +103,47 @@ class WangularpController extends \WP_REST_Controller {
 		}
 	}
 
+	public function menu() {
+		$menus = [];
+		foreach(get_nav_menu_locations() as $location => $id) {
+			$items = [];
+			foreach(wp_get_nav_menu_items($id) as $item) {
+				$items += [$item->title => $item->url];
+			}
+			$menus += [$location => $items];
+		}
+	
+		return $menus;
+	}
+
+	public function images() {
+		$args = [
+			'post_type' => 'attachment',
+			'post_mime_type' => 'image',
+			// Mandatory for wordpress to return anything
+			'post_status' => 'any',
+		];
+
+		return $this->get_data($args, fn($post) => new Model\Image($post));
+	}
+
+	public function search($request) {
+		$q = $request->get_query_params()['q'];
+
+		$args = [
+			'post_type' => 'post',
+			's' => $q,
+		];
+
+		$posts =   $this->get_data($args, fn($post) => new Model\Preview($post));
+		return array(
+			'previews' => $posts,
+			'query' => $q
+		);
+	}
+
 	private function get_data(array $args, Closure $callback) {
 		$query = new \WP_Query($args);
-
 		$data = [];
 
 		while ( $query->have_posts() ) {

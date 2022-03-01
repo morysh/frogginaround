@@ -31,6 +31,7 @@ img {
   box-shadow: 0 0 15px 20px transparent;
   cursor: pointer;
   transition: all ease constants.$TRANSITION_TIME;
+  opacity: 30%;
 
   &::before {
     $size: 64px;
@@ -52,6 +53,7 @@ img {
   }
 
   &:hover {
+    opacity: 100%;
     background: constants.$SHADE;
     box-shadow: 0 0 15px 20px constants.$SHADE;
 

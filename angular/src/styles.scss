@@ -2,11 +2,26 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Verdana, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Cormorant Garamond", "Times New Roman", serif;
+  letter-spacing: 0.05em;
+}
+
+h1 {
+  font-size: 40px;
 }
 
 html {
   min-width: 320px;
+  font-family: "Montserrat", Verdana, sans-serif;
+  letter-spacing: 0.02em;
 }
 
 body {
@@ -16,4 +31,17 @@ body {
 a {
   color: inherit;
   text-decoration: inherit;
+}
+
+button {
+  background: unset;
+  border: none;
+  border-radius: unset;
+  cursor: pointer;
+}
+
+input {
+  border-radius: unset;
+  border: none;
+  outline: none;
 }

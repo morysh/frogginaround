@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @function bezier($p0, $p1, $p2, $p3, $t) {
   $omt: 1 - $t;
   @return $omt * $omt * $omt * $p0 + 3 * $omt * $omt * $t * $p1 + 3 * $omt * $t *
@@ -5,7 +7,7 @@
 }
 
 @function bg-fade($h, $s, $l, $a, $points) {
-  $step: 1 / $points;
+  $step: math.div(1, $points);
   $t: $step;
   $xo: 0;
   $xco: 0.25;
