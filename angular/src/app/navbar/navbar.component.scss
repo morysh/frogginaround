@@ -12,6 +12,7 @@
   height: 32px;
   position: relative;
   font-size: 32px;
+  transition: filter 100ms ease;
 
   &::before {
     content: "";
@@ -38,6 +39,10 @@
     position: absolute;
     bottom: 0;
     left: 15%;
+  }
+
+  &:hover {
+    filter: drop-shadow(0 2px 3px hsla(0, 0%, 0%, 0.5));
   }
 }
 
@@ -153,6 +158,7 @@ nav {
   margin: 8px;
   width: 32px;
   height: 32px;
+  transition: filter 100ms ease;
 
   span {
     display: inline-block;
@@ -200,5 +206,9 @@ nav {
         transform: rotate(-45deg);
       }
     }
+  }
+
+  &:hover {
+    filter: drop-shadow(0 2px 3px hsla(0, 0%, 0%, 0.5));
   }
 }

@@ -1,6 +1,7 @@
 <?php
 
 require_once('wangularp.php');
+require_once('angular-enqueue.php');
 
 add_theme_support( 'custom-header' );
 add_theme_support( 'post-thumbnails' );
@@ -18,14 +19,6 @@ function wangularp_register() {
 
 function get_api_base($slug) { 
     return 'api';
-}
-
-function frogginaround_enqueue() {
-    wp_enqueue_style('fa-styles', get_template_directory_uri() . '/angular/styles.css');
-    wp_enqueue_script('runtime', get_template_directory_uri() . '/angular/runtime.js', array(), false, true);
-    wp_enqueue_script('polyfills', get_template_directory_uri() . '/angular/polyfills.js', array(), false, true);
-    wp_enqueue_script('vendor', get_template_directory_uri() . '/angular/vendor.js', array(), false, true);
-    wp_enqueue_script('main', get_template_directory_uri() . '/angular/main.js', array(), false, true);
 }
 
 function register_menus() {
