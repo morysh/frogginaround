@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   justify-items: center;
+  overflow: hidden;
 }
 
 img {
@@ -14,7 +15,6 @@ img {
   transition: transform ease constants.$TRANSITION_TIME;
 
   &:hover {
-    z-index: 20;
-    transform: scale(1.1);
+    transform: scale(0.9);
   }
 }

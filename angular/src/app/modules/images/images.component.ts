@@ -28,6 +28,7 @@ export class ImagesComponent implements OnInit {
     });
     this.headerService.setTitle('Gallerie');
   }
+
   public openModal(index: number): void {
     this.galleryIndex = index;
     this.modal = true;

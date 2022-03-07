@@ -11,6 +11,8 @@ import { Post } from '../../shared/model/post.interface';
   styleUrls: ['./single.component.scss'],
 })
 export class SingleComponent implements OnInit, AfterViewChecked {
+  private readonly WP_IMAGE_SIZE_REGEXP = /(-\d+x\d+)?(\.[a-zA-Z0-9]+)$/;
+
   get content(): any {
     return this.sanitizer.bypassSecurityTrustHtml(this.post.content);
   }
@@ -28,7 +30,7 @@ export class SingleComponent implements OnInit, AfterViewChecked {
 
   modal: boolean = false;
   images: string[] = [];
-  galleryIndex: string | number = 0;
+  galleryIndex: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -66,21 +68,20 @@ export class SingleComponent implements OnInit, AfterViewChecked {
     ).forEach((e) => {
       e.setAttribute(this.contentAttr!, '');
     });
+
+    (
+      this.ref.nativeElement.querySelectorAll(
+        '.wp-block-image img'
+      ) as NodeListOf<HTMLImageElement>
+    ).forEach((e) => {
+      const split: string[] = e.src.split(this.WP_IMAGE_SIZE_REGEXP);
+      this.images.push(split[0] + split[2]);
+    });
   }
 
   public openModal(event: MouseEvent): void {
     if ((event.target as HTMLElement).tagName === 'IMG') {
-      this.images = [];
-
-      (
-        this.ref.nativeElement.querySelectorAll(
-          'article figure img'
-        ) as NodeListOf<HTMLImageElement>
-      ).forEach((e) => {
-        this.images.push(e.src);
-      });
-
-      this.galleryIndex = (event.target as HTMLImageElement).src;
+      // this.galleryIndex = (event.target as HTMLImageElement).src;
       this.modal = true;
     }
   }

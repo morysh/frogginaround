@@ -6,44 +6,10 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
   styleUrls: ['./gallery.component.scss'],
 })
 export class GalleryComponent implements OnInit, OnDestroy {
-  private _images: string[] = [];
-
   @Input()
-  set images(images: string[]) {
-    this._images = images.map((i) => {
-      const split: string[] = i.split(this.WP_IMAGE_REGEXP);
-      return split[0] + split[2];
-    });
-  }
-
-  get images() {
-    return this._images;
-  }
-
-  _index = 0;
-
+  images: string[] = [];
   @Input()
-  get index(): number {
-    return this._index;
-  }
-
-  set index(index: number | string) {
-    if (typeof index === 'number') {
-      this._index = index;
-    } else {
-      const i = this.images.findIndex(
-        (img) =>
-          img.split(this.WP_IMAGE_REGEXP)[0] ===
-          index.split(this.WP_IMAGE_REGEXP)[0]
-      );
-
-      if (i > -1) {
-        this._index = i;
-      }
-    }
-  }
-
-  private readonly WP_IMAGE_REGEXP = /(-\d+x\d+)?(\.\w+)/;
+  index: number = 0;
 
   constructor() {}
 
@@ -56,15 +22,15 @@ export class GalleryComponent implements OnInit, OnDestroy {
   }
 
   public previous() {
-    this._index = (--this._index + this.images.length) % this.images.length;
+    this.index = (--this.index + this.images.length) % this.images.length;
   }
 
   public next() {
-    this._index = ++this._index % this.images.length;
+    this.index = ++this.index % this.images.length;
   }
 
-  public addImage(image: string): void {
-    const split: string[] = image.split(this.WP_IMAGE_REGEXP);
-    this.images.push(split[0] + split[3]);
+  public scaled(img: string): string {
+    const split = img.split(/(\.[a-zA-Z0-9]+)$/);
+    return split[0] + '-scaled' + split[1];
   }
 }

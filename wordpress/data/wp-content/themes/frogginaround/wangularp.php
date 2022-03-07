@@ -9,11 +9,10 @@ require_once __DIR__.'/helpers/angular-helper.php';
 
 use Closure;
 use Wangularp\Model;
-use WP_Error;
 use WP_REST_Response;
 
 class WangularpController extends \WP_REST_Controller {
-	const PAGE_SIZE = 12;
+	const PAGE_SIZE = -1;
 
 	public function __construct() {
 		$this->namespace = '/wangularp/v1';
@@ -94,7 +93,7 @@ class WangularpController extends \WP_REST_Controller {
 		}
 	}
 
-	public function custom_header($request) {
+	public function custom_header() {
 		if(empty(get_custom_header()->url)) {
 			return new WP_REST_Response('No custom header defined', 404);
 		} else {
@@ -118,6 +117,7 @@ class WangularpController extends \WP_REST_Controller {
 
 	public function images() {
 		$args = [
+			'posts_per_page'   => -1,
 			'post_type' => 'attachment',
 			'post_mime_type' => 'image',
 			// Mandatory for wordpress to return anything

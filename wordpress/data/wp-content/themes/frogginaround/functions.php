@@ -12,6 +12,7 @@ add_action('rest_api_init', 'wangularp_register');
 add_action('wp_enqueue_scripts', 'frogginaround_enqueue');
 add_filter('rest_url_prefix', 'get_api_base');
 
+
 function wangularp_register() {
     $controller = new Wangularp\WangularpController();
     $controller->register_routes();

@@ -3,6 +3,7 @@
   [src]="image.thumbnail"
   [alt]="image.title"
   (click)="openModal(index)"
+  loading="lazy"
 />
 <fa-modal (closed)="modalClosed()" *ngIf="modal">
   <fa-gallery [images]="fullImages" [index]="galleryIndex"></fa-gallery>
