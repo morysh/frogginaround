@@ -1,5 +1,6 @@
 import { BasePost } from './base-post.interface';
 import { Category } from './category.interface';
+import { Comment } from './comment.interface';
 import { Tag } from './tag.interface';
 
 export interface Post extends BasePost {
@@ -7,4 +8,5 @@ export interface Post extends BasePost {
   featuredMediaUrl: URL;
   categories: Category[];
   tags: Tag[];
+  comments?: Comment[];
 }

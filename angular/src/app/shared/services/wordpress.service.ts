@@ -10,6 +10,15 @@ import { BasePost } from '../model/base-post.interface';
 import { CategoryResponse } from '../model/category-response.interface';
 import { Image } from '../model/image.interface';
 import { SearchResponse } from '../model/search-response.interface';
+import { Comment } from '../model/comment.interface';
+
+type WpComment = {
+  id: number;
+  date: string;
+  author: string;
+  content: string;
+  parent?: number;
+};
 
 @Injectable({
   providedIn: 'root',
@@ -64,6 +73,30 @@ export class WordpressService {
           tag.link.host = window.location.host;
         });
         post.featuredMediaUrl &&= new URL(post.featuredMediaUrl);
+        if (post.comments) {
+          const comments: Comment[] = [];
+          const commentRegistry: Map<number, Comment> = new Map();
+
+          (post.comments as unknown as WpComment[]).forEach(
+            (wpComment: WpComment) => {
+              const comment: Comment = {
+                id: wpComment.id,
+                author: wpComment.author,
+                date: new Date(wpComment.date),
+                content: wpComment.content,
+                children: [],
+              };
+              if (wpComment.parent) {
+                commentRegistry.get(wpComment.parent)!.children.push(comment);
+              } else {
+                comments.push(comment);
+                commentRegistry.set(comment.id, comment);
+              }
+            }
+          );
+
+          post.comments = comments;
+        }
       })
     );
   }

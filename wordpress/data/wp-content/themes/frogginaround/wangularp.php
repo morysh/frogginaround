@@ -2,6 +2,7 @@
 
 namespace Wangularp;
 
+require_once __DIR__.'/model/comment.class.php';
 require_once __DIR__.'/model/image.class.php';
 require_once __DIR__.'/model/post.class.php';
 require_once __DIR__.'/model/preview.class.php';
@@ -52,6 +53,11 @@ class WangularpController extends \WP_REST_Controller {
     register_rest_route( $this->namespace, '/search', [
 						'methods'   => 'GET',
 						'callback'  => array( $this, 'search'),
+				]
+    );
+    register_rest_route( $this->namespace, '/comments/(?P<id>\d+)', [
+						'methods'   => 'GET',
+						'callback'  => array( $this, 'comments'),
 				]
     );
 	}
@@ -140,6 +146,20 @@ class WangularpController extends \WP_REST_Controller {
 			'previews' => $posts,
 			'query' => $q
 		);
+	}
+
+	public function comments($request) {
+		$comments = get_comments($request['id']);
+		$data = [];
+
+		foreach($comments as $com) {
+			$data[] = new Model\Comment($com);
+		}
+
+		// return $data;
+		// return comment_form(array(), 1);
+		return get_comments($request['id']);
+		// return sanitize_text_field('\';alert(String.fromCharCode(88,83,83))//\';alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--></SCRIPT>">\'><SCRIPT>alert(String.fromCharCode(88,83,83))</SCRIPT>');
 	}
 
 	private function get_data(array $args, Closure $callback) {
