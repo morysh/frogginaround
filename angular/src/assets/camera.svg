@@ -1,0 +1,15 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="0.5"/>
+    </filter>
+  </defs>
+  <g fill="none" stroke="white" stroke-width="4" transform="translate(5, 25)" stroke-linecap="round">
+    <rect width="90" height="60" rx="5" ry="5" id="body"/>
+    <rect width="30" height="60" rx="5" ry="5" id="handle"/>
+    <circle r="22" cx="60" cy="30" id="lens"/>
+    <path d="M45,30 A15,15 45 0 1 60,15" stroke-width="5" filter="url(#blur)" id="flare"/>
+    <path d="M10,0 Q10,-3,13,-3 H17 Q20,-3,20,0" id="trigger"/>
+    <path d="M45,0 C45,-2 47,-10 52,-10 H68 C73,-10 75,-2 75,0" id="scope"/>
+  </g>
+</svg>
