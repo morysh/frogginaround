@@ -1,3 +1,11 @@
+.home,
+.images,
+.hamburger {
+  &:hover {
+    filter: drop-shadow(0 2px 3px hsla(0, 0%, 0%, 0.5));
+  }
+}
+
 :host {
   background: hsl(126, 39%, 79%);
   display: flex;
@@ -15,7 +23,7 @@
   transition: filter 100ms ease;
 
   &::before {
-    content: "";
+    content: '';
     display: block;
     box-sizing: border-box;
     width: 70%;
@@ -29,7 +37,7 @@
   }
 
   &::after {
-    content: "";
+    content: '';
     display: block;
     box-sizing: border-box;
     width: 70%;
@@ -39,10 +47,6 @@
     position: absolute;
     bottom: 0;
     left: 15%;
-  }
-
-  &:hover {
-    filter: drop-shadow(0 2px 3px hsla(0, 0%, 0%, 0.5));
   }
 }
 
@@ -125,7 +129,7 @@ nav {
     transition-delay: 200ms;
 
     &::before {
-      content: "";
+      content: '';
       display: block;
       width: 18px;
       height: 18px;
@@ -138,7 +142,7 @@ nav {
     }
 
     &::after {
-      content: "";
+      content: '';
       display: block;
       width: 11px;
       height: 4px;
@@ -178,7 +182,7 @@ nav {
 
     &::before,
     &::after {
-      content: "";
+      content: '';
       background-color: white;
       border-radius: inherit;
       position: absolute;
@@ -212,9 +216,5 @@ nav {
         transform: rotate(-45deg);
       }
     }
-  }
-
-  &:hover {
-    filter: drop-shadow(0 2px 3px hsla(0, 0%, 0%, 0.5));
   }
 }

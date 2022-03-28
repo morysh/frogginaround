@@ -1,0 +1,22 @@
+<p class="metadatas">
+  <img [src]="comment.avatar" alt="avatar" class="avatar" />
+  <span class="author">{{ comment.author }}</span>
+  <time [attr.datetime]="comment.date.toISOString()" class="date">
+    {{ comment.date | date: "longDate" }}
+  </time>
+</p>
+<p class="content">{{ comment.content }}</p>
+<button type="button" (click)="reply = !reply" class="reply">Répondre</button>
+<fa-new-comment
+  *ngIf="reply"
+  [post]="comment.postId"
+  [parent]="comment.id"
+  label="Répondre"
+  (updated)="updateComments()"
+></fa-new-comment>
+<fa-comment
+  *ngFor="let child of comment.children"
+  [comment]="child"
+  class="child"
+  (updated)="updateComments()"
+></fa-comment>

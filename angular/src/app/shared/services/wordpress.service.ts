@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Preview } from '../model/preview.interface';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Category } from '../model/category.interface';
 import { Tag } from '../model/tag.interface';
 import { Post } from '../model/post.interface';
@@ -16,8 +16,10 @@ type WpComment = {
   id: number;
   date: string;
   author: string;
+  avatar: string;
   content: string;
   parent?: number;
+  postId: number;
 };
 
 @Injectable({
@@ -74,28 +76,9 @@ export class WordpressService {
         });
         post.featuredMediaUrl &&= new URL(post.featuredMediaUrl);
         if (post.comments) {
-          const comments: Comment[] = [];
-          const commentRegistry: Map<number, Comment> = new Map();
-
-          (post.comments as unknown as WpComment[]).forEach(
-            (wpComment: WpComment) => {
-              const comment: Comment = {
-                id: wpComment.id,
-                author: wpComment.author,
-                date: new Date(wpComment.date),
-                content: wpComment.content,
-                children: [],
-              };
-              if (wpComment.parent) {
-                commentRegistry.get(wpComment.parent)!.children.push(comment);
-              } else {
-                comments.push(comment);
-                commentRegistry.set(comment.id, comment);
-              }
-            }
+          post.comments = this.organizeComments(
+            post.comments as unknown as WpComment[]
           );
-
-          post.comments = comments;
         }
       })
     );
@@ -114,8 +97,44 @@ export class WordpressService {
       );
   }
 
+  public getComments$(post: number): Observable<Comment[]> {
+    return this.http
+      .get<WpComment[]>(`/api/wangularp/v1/comments/${post}`) //
+      .pipe(
+        map((response: WpComment[]) => {
+          return this.organizeComments(response);
+        })
+      );
+  }
+
   private transformBasePost(post: BasePost): void {
     post.link &&= new URL(post.link);
     post.publishDate &&= new Date(post.publishDate);
+  }
+
+  private organizeComments(wpComments: WpComment[]): Comment[] {
+    const comments: Comment[] = [];
+    const commentRegistry: Map<number, Comment> = new Map();
+
+    wpComments.forEach((wpComment: WpComment) => {
+      const comment: Comment = {
+        id: wpComment.id,
+        author: wpComment.author,
+        avatar: wpComment.avatar,
+        date: new Date(wpComment.date),
+        content: wpComment.content,
+        children: [],
+        postId: wpComment.postId,
+      };
+      if (wpComment.parent) {
+        commentRegistry.get(wpComment.parent)!.children.push(comment);
+        commentRegistry.set(comment.id, comment);
+      } else {
+        comments.push(comment);
+        commentRegistry.set(comment.id, comment);
+      }
+    });
+
+    return comments;
   }
 }

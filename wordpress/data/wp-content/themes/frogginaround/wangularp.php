@@ -149,17 +149,19 @@ class WangularpController extends \WP_REST_Controller {
 	}
 
 	public function comments($request) {
-		$comments = get_comments($request['id']);
+		$comments = get_comments(array(
+			'post_id' => $request['id'],
+			'status' => 'approve',
+			'orderby'=>'comment_date',
+			'order'=>'ASC'
+		));
 		$data = [];
 
 		foreach($comments as $com) {
 			$data[] = new Model\Comment($com);
 		}
 
-		// return $data;
-		// return comment_form(array(), 1);
-		return get_comments($request['id']);
-		// return sanitize_text_field('\';alert(String.fromCharCode(88,83,83))//\';alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--></SCRIPT>">\'><SCRIPT>alert(String.fromCharCode(88,83,83))</SCRIPT>');
+		return $data;
 	}
 
 	private function get_data(array $args, Closure $callback) {

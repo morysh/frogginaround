@@ -11,6 +11,11 @@
     </time>
   </section>
   <div class="content" [innerHTML]="content"></div>
+  <fa-comment-feed
+    *ngIf="comments"
+    [comments]="comments"
+    [post]="id"
+  ></fa-comment-feed>
 </article>
 <fa-modal (closed)="modalClosed()" *ngIf="modal">
   <fa-gallery [images]="images" [index]="galleryIndex"></fa-gallery>

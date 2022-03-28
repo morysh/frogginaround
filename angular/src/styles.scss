@@ -26,6 +26,14 @@ html {
 
 body {
   width: 100%;
+
+  &.waiting {
+    cursor: wait;
+
+    * {
+      cursor: inherit !important;
+    }
+  }
 }
 
 a {
@@ -40,7 +48,8 @@ button {
   cursor: pointer;
 }
 
-input {
+input,
+textarea {
   border-radius: unset;
   border: none;
   outline: none;

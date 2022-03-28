@@ -11,6 +11,7 @@ add_action('init', 'register_menus');
 add_action('rest_api_init', 'wangularp_register');
 add_action('wp_enqueue_scripts', 'frogginaround_enqueue');
 add_filter('rest_url_prefix', 'get_api_base');
+add_filter('rest_allow_anonymous_comments','anonymous_comments');
 
 
 function wangularp_register() {
@@ -24,4 +25,8 @@ function get_api_base($slug) {
 
 function register_menus() {
     register_nav_menu('navigation', __('Navigation'));
+}
+
+function anonymous_comments() {
+    return true;
 }

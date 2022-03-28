@@ -25,18 +25,21 @@ class Post extends Base_Post {
       $this->categories[] = new Category($category);
     }
     $this->tags = [];
-    foreach(get_the_tags($post) as $tag) {
-      $this->tags[] = new Tag($tag);
+    $wp_tags = get_the_tags($post);
+    if(is_array($wp_tags)) {
+      foreach($wp_tags as $tag) {
+        $this->tags[] = new Tag($tag);
+      }
     }
-    $this->featuredMediaUrl = get_the_post_thumbnail_url($post, 'large');
+    $this->featuredMediaUrl = get_the_post_thumbnail_url($post, 'full');
     if(comments_open($post)) {
       $this->comments = [];
       $comments = get_comments(array(
-        'post' => $post->ID,
+        'post_id' => $post->ID,
         'status' => 'approve',
         'orderby'=>'comment_date',
         'order'=>'ASC'
-    ));
+      ));
 
       foreach($comments as $com) {
         $this->comments[] = new Comment($com);

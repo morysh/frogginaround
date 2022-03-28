@@ -1,0 +1,60 @@
+@use '../../../../shared/scss/constants.scss' as constants;
+
+:host {
+  display: block;
+  padding: 16px 0;
+}
+
+input,
+textarea {
+  display: block;
+  margin: 8px 0;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+
+  &.ng-invalid {
+    border: 1px solid red;
+    border-left-width: 5px;
+  }
+
+  &.ng-pristine {
+    border: 1px solid #ddd;
+  }
+
+  &.ng-valid {
+    border: 1px solid green;
+    border-left-width: 5px;
+  }
+}
+
+.content {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+button {
+  display: inline-block;
+  font-size: 16px;
+  margin: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  transition: box-shadow constants.$TRANSITION_TIME ease;
+
+  &:not(:disabled) {
+    background: #b5deb9;
+
+    &:hover {
+      box-shadow: 0 5px 10px constants.$SHADE, 0 0 0 transparent inset;
+    }
+
+    &:active {
+      box-shadow: 0 0 0 transparent, 0 5px 10px constants.$SHADE inset;
+    }
+  }
+
+  &:disabled {
+    background-color: #eee;
+    cursor: not-allowed;
+  }
+}

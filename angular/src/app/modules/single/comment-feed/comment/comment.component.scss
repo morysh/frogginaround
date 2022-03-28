@@ -1,0 +1,31 @@
+@use "../../../../shared/scss/constants.scss";
+
+:host {
+  display: block;
+  border-left: 2px solid #ddd;
+  padding: 8px;
+}
+
+.metadatas {
+  font-size: 75%;
+  color: #666;
+  display: flex;
+  align-items: center;
+
+  > :not(:first-child) {
+    margin-left: 16px;
+  }
+}
+
+.reply {
+  color: #aaa;
+  transition: background-color constants.$TRANSITION_TIME ease,
+    color constants.$TRANSITION_TIME ease;
+  padding: 4px;
+  border-radius: 4px;
+
+  &:hover {
+    color: white;
+    background: #666;
+  }
+}

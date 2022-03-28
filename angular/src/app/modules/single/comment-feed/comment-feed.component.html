@@ -1,0 +1,4 @@
+<h2>Commentaires</h2>
+<fa-comment *ngFor="let comment of comments" [comment]="comment" (updated)="updateComments()"></fa-comment>
+<p *ngIf="!comments || comments.length < 1" class="empty-label">Pas de commentaires</p>
+<fa-new-comment [post]="post" (updated)="updateComments()"></fa-new-comment>

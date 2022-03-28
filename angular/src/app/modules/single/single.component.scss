@@ -1,5 +1,8 @@
-article {
+:host {
   padding: 0 5px;
+}
+
+article {
   min-width: 320px;
   max-width: 1024px;
   margin: auto;
@@ -15,7 +18,8 @@ article {
   }
 
   img {
-    height: auto;
+    max-height: 80vh;
+    object-fit: contain !important;
     cursor: pointer;
   }
 }
