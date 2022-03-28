@@ -14,4 +14,6 @@ declare const GLOBALS: any;
 export class AppComponent {
   title = 'frogginaround';
   public readonly menu = GLOBALS.menus.navigation;
+
+  constructor() {}
 }

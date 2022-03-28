@@ -1,0 +1,28 @@
+@use '../../../../shared/scss/constants.scss';
+
+:host {
+  display: block;
+  padding: 20px;
+  margin: 5px;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+
+  transition: transform ease constants.$TRANSITION_TIME;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &.info {
+    background: hsl(0, 0%, 50%);
+  }
+
+  &.success {
+    background: hsl(126, 38%, 79%);
+  }
+
+  &.error {
+    background: hsl(0, 100%, 79%);
+  }
+}

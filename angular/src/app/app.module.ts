@@ -8,14 +8,11 @@ import { FooterComponent } from './footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ToastContainerComponent } from './shared/component/toast-container/toast-container.component';
+import { ToastComponent } from './shared/component/toast-container/toast/toast.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    NavbarComponent,
-  ],
+  declarations: [AppComponent, HeaderComponent, FooterComponent, NavbarComponent, ToastContainerComponent, ToastComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
   bootstrap: [AppComponent],

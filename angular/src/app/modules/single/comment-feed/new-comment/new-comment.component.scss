@@ -42,7 +42,7 @@ button {
   transition: box-shadow constants.$TRANSITION_TIME ease;
 
   &:not(:disabled) {
-    background: #b5deb9;
+    background: hsl(126, 38%, 79%);
 
     &:hover {
       box-shadow: 0 5px 10px constants.$SHADE, 0 0 0 transparent inset;

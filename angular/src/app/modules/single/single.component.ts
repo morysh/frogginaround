@@ -80,7 +80,6 @@ export class SingleComponent implements OnInit, AfterViewChecked {
         (img) => img.split(this.WP_IMAGE_SIZE_REGEXP)[0] === (event.target as HTMLImageElement).src.split(this.WP_IMAGE_SIZE_REGEXP)[0]
       );
       this.modal = true;
-      console.log(this.images.length);
     }
   }
 
