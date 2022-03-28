@@ -1,16 +1,17 @@
 :host {
-  display: flex;
-  flex-flow: row wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  justify-items: center;
   width: 100%;
 }
 
 fa-preview {
-  flex: 1 0 320px;
+  width: 100%;
   max-width: 480px;
 }
 
 fa-preview::before {
-  content: "";
+  content: '';
   display: block;
   margin-top: 100%;
 }
