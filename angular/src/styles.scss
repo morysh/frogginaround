@@ -1,3 +1,7 @@
+:root {
+  font-size: 16px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,17 +14,31 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Cormorant Garamond", "Times New Roman", serif;
+  font-family: 'Cormorant Garamond', 'Times New Roman', serif;
   letter-spacing: 0.05em;
+  font-weight: bold;
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+  color: hsl(126, 39%, 54%);
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.2rem;
 }
 
 html {
   min-width: 320px;
-  font-family: "Montserrat", Verdana, sans-serif;
+  font-family: 'Montserrat', Verdana, sans-serif;
   letter-spacing: 0.02em;
 }
 

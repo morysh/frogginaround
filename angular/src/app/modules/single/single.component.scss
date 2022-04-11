@@ -2,6 +2,12 @@
   padding: 0 5px;
 }
 
+h2,
+h3,
+h4 {
+  margin: 1.5rem 0;
+}
+
 article {
   min-width: 320px;
   max-width: 1024px;
@@ -9,8 +15,13 @@ article {
   text-align: justify;
   line-height: 160%;
 
+  a {
+    color: hsl(126, 39%, 54%);
+    text-decoration: underline;
+  }
+
   p {
-    margin: 24px 0;
+    margin: 1.5rem 0;
   }
 
   figure {
