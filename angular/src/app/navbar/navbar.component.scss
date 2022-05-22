@@ -1,9 +1,9 @@
-.home,
-.images,
-.hamburger {
-  &:hover {
-    filter: drop-shadow(0 2px 3px hsla(0, 0%, 0%, 0.5));
-  }
+.control {
+  filter: drop-shadow(0 1px 1px hsla(0, 0%, 0%, 0.5));
+}
+
+.control--hover:hover {
+  filter: drop-shadow(0 2px 3px hsla(0, 0%, 0%, 0.5));
 }
 
 :host {
@@ -90,6 +90,7 @@ nav {
     }
 
     .submit {
+      filter: none;
       background-position: 100%;
       transition-delay: 0s;
 
@@ -125,7 +126,7 @@ nav {
     position: relative;
     background: linear-gradient(to right, transparent 50%, white 50%);
     background-size: 200%;
-    transition: background-position 100ms linear;
+    transition: background-position 100ms linear, filter 100ms ease-in;
     transition-delay: 200ms;
 
     &::before {
