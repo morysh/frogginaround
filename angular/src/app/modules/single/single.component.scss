@@ -79,3 +79,21 @@ article {
   margin-left: 16px;
   white-space: nowrap;
 }
+
+.wp-block-embed__wrapper {
+  iframe {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  &::before {
+    content: '';
+    padding-top: 56.25%;
+    display: block;
+  }
+}

@@ -21,6 +21,7 @@
   position: relative;
   font-size: 32px;
   transition: filter 100ms ease;
+  flex: 0 0 auto;
 
   &::before {
     content: '';
@@ -79,8 +80,11 @@ nav {
 .search {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   padding: 8px;
   margin-left: auto;
+  flex: 1 1 auto;
+  min-width: 0;
 
   &:hover,
   &:focus-within {
@@ -114,6 +118,8 @@ nav {
     transform: scaleX(0);
     transform-origin: right;
     transition: transform 200ms linear;
+    flex: 0 1 320px;
+    min-width: 0;
 
     &:focus {
       transform: scaleX(1);
@@ -128,6 +134,7 @@ nav {
     background-size: 200%;
     transition: background-position 100ms linear, filter 100ms ease-in;
     transition-delay: 200ms;
+    flex: 0 0 auto;
 
     &::before {
       content: '';
@@ -163,6 +170,7 @@ nav {
   margin: 4px;
   width: 40px;
   height: 40px;
+  flex: 0 0 auto;
 }
 
 .hamburger {
@@ -170,6 +178,7 @@ nav {
   width: 32px;
   height: 32px;
   transition: filter 100ms ease;
+  flex: 0 0 auto;
 
   span {
     display: inline-block;
