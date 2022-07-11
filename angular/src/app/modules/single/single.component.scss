@@ -97,3 +97,7 @@ article {
     display: block;
   }
 }
+
+.wp-block-gallery.columns-1 figure.wp-block-image:not(:last-of-type) {
+  margin-bottom: 1em !important;
+}

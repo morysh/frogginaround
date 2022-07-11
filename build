@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Stop if command fails
+set -e
+
+while getopts ":t:m:" opt; do
+  case $opt in
+    t)
+      tag=$OPTARG
+      ;;
+    m)
+      msg=$OPTARG
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
+if test -z "$tag"
+then
+  echo "Tag is missing (-t)"
+fi
+
+if test -z "$msg"
+then
+  echo "Commit message is missing (-m)"
+fi
+
+cd angular
+
+npm version $tag
+npm run build
+
+cd ..
+
+git add *
+git commit -m "$msg"
+git tag $tag
+git push && git push --tags
+
+docker build -t morysh/froggin-around:$tag .
+docker push morysh/froggin-around:$tag
