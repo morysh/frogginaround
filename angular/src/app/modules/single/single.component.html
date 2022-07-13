@@ -11,11 +11,21 @@
     </time>
   </section>
   <div class="content" [innerHTML]="content"></div>
-  <fa-comment-feed
-    *ngIf="comments"
-    [comments]="comments"
-    [post]="id"
-  ></fa-comment-feed>
+  <nav class="adjacent">
+    <a class="prev" *ngIf="prev" [href]="prev.url">
+      <div class="text">
+        <h4 class="label">Post précédent</h4>
+        <div class="title">{{ prev.title }}</div>
+      </div>
+    </a>
+    <a class="next" *ngIf="next" [href]="next.url">
+      <div class="text">
+        <h4 class="label">Post suivant</h4>
+        <div class="title">{{ next.title }}</div>
+      </div>
+    </a>
+  </nav>
+  <fa-comment-feed *ngIf="comments" [comments]="comments" [post]="id"></fa-comment-feed>
 </article>
 <fa-modal (closed)="modalClosed()" *ngIf="modal">
   <fa-gallery [images]="images" [index]="galleryIndex"></fa-gallery>

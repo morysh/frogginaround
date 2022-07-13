@@ -39,27 +39,23 @@ export class WordpressService {
   }
 
   public getCategoryPreviews$(category: number): Observable<CategoryResponse> {
-    return this.http
-      .get<CategoryResponse>(`/api/wangularp/v1/previews/category/${category}`)
-      .pipe(
-        tap((response: CategoryResponse) => {
-          response.previews.forEach((preview: Preview) => {
-            this.transformBasePost(preview);
-          });
-        })
-      );
+    return this.http.get<CategoryResponse>(`/api/wangularp/v1/previews/category/${category}`).pipe(
+      tap((response: CategoryResponse) => {
+        response.previews.forEach((preview: Preview) => {
+          this.transformBasePost(preview);
+        });
+      })
+    );
   }
 
   public getSearchPreviews$(query: string): Observable<SearchResponse> {
-    return this.http
-      .get<SearchResponse>(`/api/wangularp/v1/search?q=${query || ''}`)
-      .pipe(
-        tap((response: SearchResponse) => {
-          response.previews.forEach((preview: Preview) => {
-            this.transformBasePost(preview);
-          });
-        })
-      );
+    return this.http.get<SearchResponse>(`/api/wangularp/v1/search?q=${query || ''}`).pipe(
+      tap((response: SearchResponse) => {
+        response.previews.forEach((preview: Preview) => {
+          this.transformBasePost(preview);
+        });
+      })
+    );
   }
 
   public getPost$(id: string): Observable<Post> {
@@ -76,9 +72,13 @@ export class WordpressService {
         });
         post.featuredMediaUrl &&= new URL(post.featuredMediaUrl);
         if (post.comments) {
-          post.comments = this.organizeComments(
-            post.comments as unknown as WpComment[]
-          );
+          post.comments = this.organizeComments(post.comments as unknown as WpComment[]);
+        }
+        if (post.prev) {
+          post.prev.url = new URL(post.prev.url);
+        }
+        if (post.next) {
+          post.next.url = new URL(post.next.url);
         }
       })
     );

@@ -1,0 +1,29 @@
+while getopts ":t:m:d" opt; do
+	case $opt in
+		t)
+			tag=$OPTARG
+			;;
+		\?)
+			echo "Invalid option: -$OPTARG" >&2
+			exit 1
+			;;
+		:)
+			echo "Option -$OPTARG requires an argument." >&2
+			exit 1
+			;;
+	esac
+done
+
+if test -z "$tag"
+then
+	echo "Tag is missing (-t)"
+	exit 1
+fi
+
+
+ssh morysh@frogginaround.com -i ~/.ssh/frogginaround << EOF
+	cd /home/morysh/frogginaround_v2
+	sed -i -E "s@(morysh/froggin-around:).+\\\$@\1$tag@g" docker-compose.yaml
+	docker-compose pull
+	docker-compose down && docker-compose up -d
+EOF

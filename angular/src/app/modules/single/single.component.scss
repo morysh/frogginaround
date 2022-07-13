@@ -98,6 +98,53 @@ article {
   }
 }
 
-.wp-block-gallery.columns-1 figure.wp-block-image:not(:last-of-type) {
-  margin-bottom: 1em !important;
+.wp-block-gallery {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 0.5em;
+}
+
+.adjacent {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+
+  .prev,
+  .next {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 1em;
+    max-width: 40%;
+
+    .label {
+      margin: 0 0 0.5rem 0;
+    }
+  }
+
+  .prev::before,
+  .next::after {
+    content: '';
+    display: block;
+    width: 1em;
+    height: 1em;
+    border-top: 0.3em solid currentColor;
+    flex: 0 0 auto;
+  }
+
+  .prev::before {
+    border-left: 0.3em solid currentColor;
+    transform: rotate(-45deg);
+  }
+
+  .next {
+    text-align: right;
+    margin-left: auto;
+
+    &::after {
+      border-right: 0.3em solid currentColor;
+      transform: rotate(45deg);
+    }
+  }
 }

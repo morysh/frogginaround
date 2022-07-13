@@ -6,6 +6,7 @@ require_once __DIR__.'/base_post.class.php';
 require_once __DIR__.'/category.class.php';
 require_once __DIR__.'/tag.class.php';
 require_once __DIR__.'/comment.class.php';
+require_once __DIR__.'/link.class.php';
 
 class Post extends Base_Post {
   public string $content;
@@ -16,6 +17,8 @@ class Post extends Base_Post {
   public string $featuredMediaUrl;
   // Comment[]
   public array $comments;
+  public Link $prev;
+  public Link $next;
 
   public function __construct(\WP_Post $post) {
     parent::__construct($post);
@@ -44,6 +47,18 @@ class Post extends Base_Post {
       foreach($comments as $com) {
         $this->comments[] = new Comment($com);
       }
+    }
+
+    $GLOBALS['post'] = $post;
+
+    $prevPost = get_previous_post();
+    if($prevPost) {
+      $this->prev = new Link(get_the_permalink($prevPost), $prevPost->post_title);
+    }
+    
+    $nextPost = get_next_post();
+    if($nextPost) {
+      $this->next = new Link(get_the_permalink($nextPost), $nextPost->post_title);
     }
   }
 }

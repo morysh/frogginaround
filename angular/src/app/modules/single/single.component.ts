@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/shared/model/category.interface';
 import { Comment } from 'src/app/shared/model/comment.interface';
+import { Link } from 'src/app/shared/model/link.interface';
 import { HeaderService } from 'src/app/shared/services/header.service';
 import { Post } from '../../shared/model/post.interface';
 
@@ -32,6 +33,14 @@ export class SingleComponent implements OnInit, AfterViewChecked {
 
   get comments(): Comment[] | undefined {
     return this.post.comments;
+  }
+
+  get prev(): Link | undefined {
+    return this.post.prev;
+  }
+
+  get next(): Link | undefined {
+    return this.post.next;
   }
 
   private post!: Post;
