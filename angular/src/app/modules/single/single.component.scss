@@ -104,6 +104,10 @@ article {
   gap: 0.5em;
 }
 
+.wp-block-gallery.columns-1 {
+  flex-flow: column nowrap;
+}
+
 .adjacent {
   width: 100%;
   display: flex;
