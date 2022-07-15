@@ -14,7 +14,7 @@ textarea {
   font-size: 16px;
 
   &.ng-invalid {
-    border: 1px solid red;
+    border: 1px solid var(--error-dark);
     border-left-width: 5px;
   }
 
@@ -23,7 +23,7 @@ textarea {
   }
 
   &.ng-valid {
-    border: 1px solid green;
+    border: 1px solid var(--success-dark);
     border-left-width: 5px;
   }
 }
@@ -40,22 +40,23 @@ button {
   margin: 8px;
   padding: 8px;
   border-radius: 8px;
-  transition: box-shadow constants.$TRANSITION_TIME ease;
+  transition: box-shadow var(--transition-time) ease;
+  color: var(--bg);
 
   &:not(:disabled) {
-    background: hsl(126, 38%, 79%);
+    background: var(--success-dark);
 
     &:hover {
-      box-shadow: 0 5px 10px constants.$SHADE, 0 0 0 transparent inset;
+      box-shadow: 0 5px 10px var(--shade), 0 0 0 transparent inset;
     }
 
     &:active {
-      box-shadow: 0 0 0 transparent, 0 5px 10px constants.$SHADE inset;
+      box-shadow: 0 0 0 transparent, 0 5px 10px var(--shade) inset;
     }
   }
 
   &:disabled {
-    background-color: #eee;
+    background: var(--dwindle-light);
     cursor: not-allowed;
   }
 }

@@ -1,13 +1,13 @@
 .control {
-  filter: drop-shadow(0 1px 1px hsla(0, 0%, 0%, 0.5));
+  filter: drop-shadow(0 1px 1px hsla(0, 0%, 0%, var(--shade-alpha)));
 }
 
 .control--hover:hover {
-  filter: drop-shadow(0 2px 3px hsla(0, 0%, 0%, 0.5));
+  filter: drop-shadow(0 2px 3px hsla(0, 0%, 0%, var(--shade-alpha)));
 }
 
 :host {
-  background: hsl(126, 39%, 79%);
+  background: var(--accent);
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -29,8 +29,8 @@
     box-sizing: border-box;
     width: 70%;
     height: 70%;
-    border-left: 0.1em solid white;
-    border-top: 0.1em solid white;
+    border-left: 0.1em solid var(--bg);
+    border-top: 0.1em solid var(--bg);
     position: absolute;
     left: 15%;
     top: 10%;
@@ -43,7 +43,7 @@
     box-sizing: border-box;
     width: 70%;
     height: 50%;
-    border: 0.1em solid white;
+    border: 0.1em solid var(--bg);
     border-top: none;
     position: absolute;
     bottom: 0;
@@ -52,7 +52,7 @@
 }
 
 nav {
-  color: white;
+  color: var(--bg);
   position: absolute;
   display: flex;
   flex-flow: column nowrap;
@@ -72,7 +72,7 @@ nav {
   padding: 12px;
 
   &:hover {
-    background: hsla(0, 0%, 0%, 0.6);
+    background: hsla(0, 0%, 0%, var(--shade-alpha));
     transition: all ease 300ms;
   }
 }
@@ -83,7 +83,7 @@ nav {
   justify-content: flex-end;
   padding: 8px;
   margin-left: auto;
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   min-width: 0;
 
   &:hover,
@@ -99,12 +99,12 @@ nav {
       transition-delay: 0s;
 
       &::before {
-        border-color: #666;
+        border-color: var(--dwindle);
         transition-delay: 0s;
       }
 
       &::after {
-        background: #666;
+        background: var(--dwindle);
         transition-delay: 0s;
       }
     }
@@ -130,7 +130,7 @@ nav {
     width: 32px;
     height: 32px;
     position: relative;
-    background: linear-gradient(to right, transparent 50%, white 50%);
+    background: linear-gradient(to right, transparent 50%, var(--bg) 50%);
     background-size: 200%;
     transition: background-position 100ms linear, filter 100ms ease-in;
     transition-delay: 200ms;
@@ -141,7 +141,7 @@ nav {
       display: block;
       width: 18px;
       height: 18px;
-      border: 2px solid white;
+      border: 2px solid var(--bg);
       border-radius: 50%;
       position: absolute;
       top: 2px;
@@ -154,7 +154,7 @@ nav {
       display: block;
       width: 11px;
       height: 4px;
-      background: white;
+      background: var(--bg);
       border-radius: 2px;
       position: absolute;
       bottom: 2px;
@@ -173,6 +173,13 @@ nav {
   flex: 0 0 auto;
 }
 
+.camera {
+  background: var(--bg);
+  mask: url(../../assets/camera.svg);
+  width: 100%;
+  height: 100%;
+}
+
 .hamburger {
   margin: 8px;
   width: 32px;
@@ -184,7 +191,7 @@ nav {
     display: inline-block;
     width: 100%;
     height: 6px;
-    background: white;
+    background: var(--bg);
     vertical-align: middle;
     border-radius: 3px;
     position: relative;
@@ -193,7 +200,7 @@ nav {
     &::before,
     &::after {
       content: '';
-      background-color: white;
+      background-color: var(--bg);
       border-radius: inherit;
       position: absolute;
       display: block;

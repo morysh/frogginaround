@@ -1,5 +1,22 @@
+@use 'app/shared/scss/constants.scss';
+
 :root {
   font-size: 16px;
+  --bg: #eee;
+  --dwindle: #666;
+  --dwindle-light: #aaa;
+  --disabled: #ddd;
+  --accent: hsl(126, 38%, 79%);
+  --accent-dark: hsl(126, 38%, 54%);
+  --error: hsl(0, 100%, 79%);
+  --error-dark: hsl(0, 100%, 54%);
+  --success: hsl(126, 38%, 79%);
+  --success-dark: hsl(126, 38%, 54%);
+  --shade-alpha: #{constants.$SHADE_ALPHA};
+  --shade: hsla(0, 0%, 0%, var(--shade-alpha));
+  --glow: hsla(0, 0%, 100%, var(--shade-alpha));
+
+  --transition-time: 300ms;
 }
 
 * {
@@ -25,7 +42,7 @@ h1 {
 
 h2 {
   font-size: 2rem;
-  color: hsl(126, 39%, 54%);
+  color: var(--accent-dark);
 }
 
 h3 {

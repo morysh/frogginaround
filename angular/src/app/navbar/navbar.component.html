@@ -5,8 +5,9 @@
   <button type="submit" class="submit control"></button>
 </form>
 
-<a href="/images" routerLink="/images" class="images">
-  <img src="assets/camera.svg" alt="" class="control control--hover" />
+<a href="/images" routerLink="/images" class="images control control--hover">
+  <!-- <img src="assets/camera.svg" alt="" class="control control--hover" /> -->
+  <div class="camera"></div>
 </a>
 
 <button type="button" class="hamburger control control--hover" (click)="toggleNav($event)" [ngClass]="{ open: nav }">

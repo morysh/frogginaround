@@ -1,5 +1,5 @@
-@use "../../../shared/scss/gradient";
-@use "../../../shared/scss/constants";
+@use '../../../shared/scss/gradient';
+@use '../../../shared/scss/constants';
 
 :host {
   position: relative;
@@ -25,13 +25,10 @@
   position: relative;
 
   &::after {
-    content: "";
+    content: '';
     display: block;
     padding-top: 20%;
-    background: linear-gradient(
-      to top,
-      gradient.bg-fade(0, 0, 0, constants.$SHADE_ALPHA, 10)
-    );
+    background: linear-gradient(to top, gradient.bg-fade(0, 0, 0, constants.$SHADE_ALPHA, 10));
     position: absolute;
     bottom: 0;
     left: 0;
@@ -40,8 +37,8 @@
 }
 
 .legend {
-  color: white;
-  background: hsla(0, 0%, 0%, constants.$SHADE_ALPHA);
+  color: var(--bg);
+  background: hsla(0, 0%, 0%, var(--shade-alpha));
   padding: 15px;
 }
 
@@ -50,7 +47,7 @@
   flex: 0 0 100%;
   display: flex;
   flex-flow: column nowrap;
-  transition: flex-shrink constants.$TRANSITION_TIME;
+  transition: flex-shrink var(--transition-time);
 }
 
 :host:hover .title {

@@ -16,7 +16,7 @@ article {
   line-height: 160%;
 
   a {
-    color: hsl(126, 39%, 54%);
+    color: var(--accent-dark);
     text-decoration: underline;
   }
 
@@ -38,7 +38,7 @@ article {
 .metadatas {
   margin-top: 16px;
   font-size: 75%;
-  color: #666;
+  color: var(--dwindle);
   font-style: italic;
 
   display: flex;

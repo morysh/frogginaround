@@ -1,6 +1,6 @@
-@use "sass:math";
-@use "../../../shared/scss/gradient";
-@use "../../../shared/scss/constants";
+@use 'sass:math';
+@use '../../../shared/scss/gradient';
+@use '../../../shared/scss/constants';
 
 :host {
   margin: auto;
@@ -33,48 +33,67 @@ img {
   bottom: 0;
   width: 100px;
   display: flex;
-  box-shadow: 0 0 15px 20px transparent;
+  // box-shadow: 0 0 15px 20px transparent;
   cursor: pointer;
-  transition: all ease constants.$TRANSITION_TIME;
-  opacity: 30%;
+  transition: all ease var(--transition-time);
 
-  &::before {
-    $size: 64px;
-    $borderSize: 10px;
-    $border: $borderSize solid constants.$PRIMARY_COLOR;
-
-    content: "";
-    width: $size;
-    height: $size;
-    border-left: $border;
-    border-bottom: $border;
-    border-top-left-radius: $borderSize;
-    border-bottom-right-radius: $borderSize;
-    border-bottom-left-radius: math.div($borderSize, 2);
-    margin: auto;
-    transform: translateX(30px) rotate(45deg);
-    filter: drop-shadow(0 0 8px black);
-    transition: all ease constants.$TRANSITION_TIME;
+  @media (hover: hover) {
+    opacity: 30%;
   }
 
-  &:hover {
-    opacity: 100%;
-    background: constants.$SHADE;
-    box-shadow: 0 0 15px 20px constants.$SHADE;
+  @media (hover: none) {
+    opacity: 50%;
+  }
 
-    &::before {
-      transform: translateX(30px) rotate(45deg) scale(1.1);
-      filter: drop-shadow(0 0 8px white);
+  &::before {
+    @media (hover: hover) {
+      --size: 64px;
+      --borderSize: 10px;
+      --border: var(--borderSize) solid var(--bg);
+      margin: auto;
+      transform: translateX(30%) rotate(45deg);
     }
 
-    &::after {
-      opacity: 1;
+    @media (hover: none) {
+      --size: 32px;
+      --borderSize: 5px;
+      --border: var(--borderSize) solid var(--bg);
+      align-self: flex-end;
+      transform: translateX(30%) translateY(-30%) rotate(45deg);
+    }
+
+    content: '';
+    width: var(--size);
+    height: var(--size);
+    border-left: var(--border);
+    border-bottom: var(--border);
+    border-top-left-radius: var(--borderSize);
+    border-bottom-right-radius: var(--borderSize);
+    border-bottom-left-radius: calc(var(--borderSize) / 2);
+    filter: drop-shadow(0 0 8px black);
+    transition: all ease var(--transition-time);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      opacity: 100%;
+      background: var(--shade);
+      box-shadow: 0 0 15px 20px var(--shade);
+
+      &::before {
+        transform: translateX(30px) rotate(45deg) scale(1.1);
+        filter: drop-shadow(0 0 8px var(--bg));
+      }
+
+      &::after {
+        opacity: 1;
+      }
     }
   }
 }
 
 // trick to share the style with .prev
 .next {
-  transform: rotate(180deg);
+  transform: scaleX(-1);
   transform-origin: 50vw;
 }

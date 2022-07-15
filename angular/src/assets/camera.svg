@@ -4,7 +4,7 @@
         <feGaussianBlur stdDeviation="0.5"/>
     </filter>
   </defs>
-  <g fill="none" stroke="white" stroke-width="4" transform="translate(5, 25)" stroke-linecap="round">
+  <g fill="none" stroke="black" stroke-width="4" transform="translate(5, 25)" stroke-linecap="round">
     <rect width="90" height="60" rx="5" ry="5" id="body"/>
     <rect width="30" height="60" rx="5" ry="5" id="handle"/>
     <circle r="22" cx="60" cy="30" id="lens"/>

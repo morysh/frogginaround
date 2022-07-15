@@ -1,5 +1,5 @@
-@use "sass:math";
-@use "../../../shared/scss/constants";
+@use 'sass:math';
+@use '../../../shared/scss/constants';
 
 :host {
   position: fixed;
@@ -7,7 +7,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background: constants.$SHADE;
+  background: var(--shade);
   cursor: pointer;
   display: flex;
   z-index: 1000;
@@ -28,7 +28,7 @@
   flex-flow: column nowrap;
   justify-content: center;
   filter: drop-shadow(0 0 8px black);
-  transition: transform ease constants.$TRANSITION_TIME;
+  transition: transform ease var(--transition-time);
 
   &:hover {
     transform: scale(1.1);
@@ -36,11 +36,11 @@
 
   &::before,
   &::after {
-    content: "";
+    content: '';
     display: block;
     width: $L;
     height: $l;
-    background: constants.$PRIMARY_COLOR;
+    background: var(--bg);
     border-radius: math.div($l, 2);
   }
 

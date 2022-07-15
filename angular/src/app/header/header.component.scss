@@ -1,5 +1,5 @@
-@use "../shared/scss/gradient";
-@use "../shared/scss/constants";
+@use '../shared/scss/gradient';
+@use '../shared/scss/constants';
 
 .banner {
   display: flex;
@@ -20,20 +20,17 @@ h1 {
   bottom: 0;
   right: 0;
   text-align: center;
-  color: white;
+  color: var(--bg);
 
   &::before {
-    content: "";
+    content: '';
     display: block;
-    background: linear-gradient(
-      to top,
-      gradient.bg-fade(0, 0, 0, constants.$SHADE_ALPHA, 10)
-    );
+    background: linear-gradient(to top, gradient.bg-fade(0, 0, 0, constants.$SHADE_ALPHA, 10));
     height: 32px;
   }
 
   .title {
     padding: 10px;
-    background: constants.$SHADE;
+    background: var(--shade);
   }
 }

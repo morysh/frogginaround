@@ -4,11 +4,11 @@
   display: block;
   padding: 20px;
   margin: 5px;
-  color: white;
+  color: var(--bg);
   border-radius: 10px;
   cursor: pointer;
 
-  transition: transform ease constants.$TRANSITION_TIME;
+  transition: transform ease var(--transition-time);
 
   &:hover {
     transform: scale(1.1);
@@ -19,10 +19,10 @@
   }
 
   &.success {
-    background: hsl(126, 38%, 79%);
+    background: var(--success);
   }
 
   &.error {
-    background: hsl(0, 100%, 79%);
+    background: var(--error);
   }
 }

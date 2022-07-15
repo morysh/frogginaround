@@ -1,4 +1,4 @@
-@use "../../../../shared/scss/constants.scss";
+@use '../../../../shared/scss/constants.scss';
 
 :host {
   display: block;
@@ -8,7 +8,7 @@
 
 .metadatas {
   font-size: 75%;
-  color: #666;
+  color: var(--dwindle);
   display: flex;
   align-items: center;
 
@@ -18,14 +18,13 @@
 }
 
 .reply {
-  color: #aaa;
-  transition: background-color constants.$TRANSITION_TIME ease,
-    color constants.$TRANSITION_TIME ease;
+  color: var(--dwindle-light);
+  transition: background-color var(--transition-time) ease, color var(--transition-time) ease;
   padding: 4px;
   border-radius: 4px;
 
   &:hover {
-    color: white;
-    background: #666;
+    color: var(--bg);
+    background: var(--dwindle);
   }
 }

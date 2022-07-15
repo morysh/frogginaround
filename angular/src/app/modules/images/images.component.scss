@@ -14,7 +14,7 @@ img {
   max-width: 480px;
   cursor: pointer;
   user-select: none;
-  transition: transform ease constants.$TRANSITION_TIME;
+  transition: transform ease var(--transition-time);
 
   &:hover {
     transform: scale(0.9);
