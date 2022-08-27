@@ -3,6 +3,8 @@
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   justify-items: center;
   width: 100%;
+  padding: 5px;
+  gap: 5px;
 }
 
 fa-preview {
