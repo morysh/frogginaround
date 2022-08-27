@@ -6,12 +6,12 @@
   --dwindle: #666;
   --dwindle-light: #aaa;
   --disabled: #ddd;
-  --accent: hsl(126, 38%, 79%);
-  --accent-dark: hsl(126, 38%, 54%);
+  --accent: hsl(127deg 28% 39%);
+  --accent-light: hsl(127deg 28% 50%);
   --error: hsl(0, 100%, 79%);
   --error-dark: hsl(0, 100%, 54%);
-  --success: hsl(126, 38%, 79%);
-  --success-dark: hsl(126, 38%, 54%);
+  --success: hsl(127deg 28% 50%);
+  --success-dark: hsl(127deg 28% 39%);
   --shade-alpha: #{constants.$SHADE_ALPHA};
   --shade: hsla(0, 0%, 0%, var(--shade-alpha));
   --glow: hsla(0, 0%, 100%, var(--shade-alpha));
@@ -42,7 +42,7 @@ h1 {
 
 h2 {
   font-size: 2rem;
-  color: var(--accent-dark);
+  color: var(--accent-light);
 }
 
 h3 {
